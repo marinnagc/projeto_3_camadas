@@ -38,8 +38,6 @@ def main():
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
-                  
-
         imageR = "./img/llama1kb.jpg" #img a ser transmitida
         #carrega a img
         print("carregando imagem para transmissão: ")
@@ -56,31 +54,27 @@ def main():
 
         def datagrama(tipo,n_pacotes,total_pacotes,dados):
             ceop = b'\xAA\xBB\xAA\xBB'
-            if tipo == 1:
-                head = b'\x01\xFF'+bytes(n_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
+            if tipo == 1: # chamado do cliente enviado ao servidor convidando-o para a transmissão
+                head = b'\x01\xFF'+bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
                 payload_1 = b''
                 dtg = head+payload_1+ceop
-            elif tipo == 3:
+            elif tipo == 3: # envio de pacotes (mostra x de y pacotes enviados)
                 head = b'\x03\xFF'+ bytes(n_pacotes) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
                 payload_1 = np.asarray(dados)
                 dtg = head+payload_1+ceop
-            elif tipo == 5:
+            elif tipo == 5: # mensagem de time out
                 head = b'\x05\xFF'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
                 dtg = head+payload_1+ceop
             return dtg
 
         com1.sendData()
-
-
-
-        
            
         #aqui você deverá gerar os dados a serem transmitidos. 
         #seus dados a serem transmitidos são um array bytes a serem transmitidos. Gere esta lista com o 
         #nome de txBuffer. Esla sempre irá armazenar os dados a serem enviados.
 
        # head = b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-        #payload = "./img/.jpg"
+       # payload = "./img/.jpg"
        # eop = b'\0xAA\0xBB\0xAA\0xBB'
        # datagrama = head + payload + eop
 
