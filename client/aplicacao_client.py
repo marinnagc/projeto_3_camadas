@@ -32,7 +32,6 @@ def main():
         #para declarar esse objeto é o nome da porta.
         com1 = enlace(serialName)
         
-    
         # Ativa comunicacao. Inicia os threads e a comunicação seiral 
         com1.enable()
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
@@ -43,16 +42,14 @@ def main():
         print("carregando imagem para transmissão: ")
         txBuffer = open(imageR,"rb").read() #imagem em bytes!
 
-
         def divide_pacotes(txBuffer):
             pacotes= []
-            for i in range(len(txBuffer)):
+            for i in range(0,len(txBuffer),140):
                 pacote = txBuffer[i:i + 140]
                 pacotes.append(pacote)
             return pacotes, len(pacotes)
 
-
-        def datagrama(tipo,n_pacotes,total_pacotes,dados):
+        def datagrama(tipo,num,total_pacotes,dados):
             ceop = b'\xAA\xBB\xAA\xBB'
             if tipo == 1: # chamado do cliente enviado ao servidor convidando-o para a transmissão
                 head = b'\x01\xFF'+bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
@@ -60,6 +57,12 @@ def main():
                 dtg = head+payload_1+ceop
             elif tipo == 3: # envio de pacotes (mostra x de y pacotes enviados)
                 head = b'\x03\xFF'+ bytes(n_pacotes) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
+            if tipo == 1:
+                head = b'\x01\xFF'+bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
+                payload_1 = b''
+                dtg = head+payload_1+ceop
+            elif tipo == 3:
+                head = b'\x03\xFF'+ bytes(num) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
                 payload_1 = np.asarray(dados)
                 dtg = head+payload_1+ceop
             elif tipo == 5: # mensagem de time out
@@ -113,9 +116,6 @@ def main():
         for i in range(len(rxBuffer)):
             print("recebeu {}" .format(rxBuffer[i]))
         
-
-    
-
         # Encerra comunicação
         print("-------------------------")
         print("Comunicação encerrada")
