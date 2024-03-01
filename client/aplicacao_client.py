@@ -48,20 +48,20 @@ def main():
 
         def divide_pacotes(txBuffer):
             pacotes= []
-            for i in range(len(txBuffer)):
+            for i in range(0,len(txBuffer),140):
                 pacote = txBuffer[i:i + 140]
                 pacotes.append(pacote)
             return pacotes, len(pacotes)
 
 
-        def datagrama(tipo,n_pacotes,total_pacotes,dados):
+        def datagrama(tipo,num,total_pacotes,dados):
             ceop = b'\xAA\xBB\xAA\xBB'
             if tipo == 1:
-                head = b'\x01\xFF'+bytes(n_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
+                head = b'\x01\xFF'+bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
                 payload_1 = b''
                 dtg = head+payload_1+ceop
             elif tipo == 3:
-                head = b'\x03\xFF'+ bytes(n_pacotes) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
+                head = b'\x03\xFF'+ bytes(num) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
                 payload_1 = np.asarray(dados)
                 dtg = head+payload_1+ceop
             elif tipo == 5:
