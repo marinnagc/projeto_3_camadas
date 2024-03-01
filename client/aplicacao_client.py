@@ -56,12 +56,6 @@ def main():
                 payload_1 = b''
                 dtg = head+payload_1+ceop
             elif tipo == 3: # envio de pacotes (mostra x de y pacotes enviados)
-                head = b'\x03\xFF'+ bytes(n_pacotes) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
-            if tipo == 1:
-                head = b'\x01\xFF'+bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
-                payload_1 = b''
-                dtg = head+payload_1+ceop
-            elif tipo == 3:
                 head = b'\x03\xFF'+ bytes(num) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
                 payload_1 = np.asarray(dados)
                 dtg = head+payload_1+ceop
