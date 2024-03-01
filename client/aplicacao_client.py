@@ -49,31 +49,58 @@ def main():
                 pacotes.append(pacote)
             return pacotes, len(pacotes)
 
-        def datagrama(tipo,num,total_pacotes,dados):
+        # num e o numero de pacote atual
+        # len(dados) e o tamanho do pacote
+        def datagrama(tipo, num, total_pacotes, dados):
             ceop = b'\xAA\xBB\xAA\xBB'
             if tipo == 1: # chamado do cliente enviado ao servidor convidando-o para a transmissão
                 head = b'\x01\xFF'+bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00\x00'
-                payload_1 = b''
-                dtg = head+payload_1+ceop
+                dtg = head+ceop
             elif tipo == 3: # envio de pacotes (mostra x de y pacotes enviados)
-                head = b'\x03\xFF'+ bytes(num) + bytes(total_pacotes) + b'\x00\x00\x00\x00\x00\x00'
+                head = b'\x03'+ bytes(num) + bytes(total_pacotes) + bytes(len(dados))+ b'\x00\x00\x00\x00\x00\x00'
                 payload_1 = np.asarray(dados)
                 dtg = head+payload_1+ceop
             elif tipo == 5: # mensagem de time out
-                head = b'\x05\xFF'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
-                dtg = head+payload_1+ceop
+                head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
+                dtg = head+ceop
+
             return dtg
 
-        com1.sendData()
-           
+        com1.sendData(datagrama(1, 0, divide_pacotes(txBuffer)[1], 0)) #envia o convite para o servidor
+
+        rxBuffer, nRx = com1.getData(2) #recebe a resposta do servidor
+        while rxBuffer[0] != b'\x02':
+            rxBuffer, nRx = com1.getData(2)
+                
+        if rxBuffer[0] == b'\x05':
+            print("Time out!")
+            com1.disable()
+
+        if rxBuffer[0] == b'\x06':
+            print("Pacote incorreto!, o pacote esperado era {}" .format(rxBuffer[1]))
+
+        timeout = 10
+        rx = RX(fisica)
+        tempo_inicial = time.time()
+        tempo_duracao = 0
+        while com1.rx.getBufferLen() < 1:
+            #print(com1.rx.getBufferLen())
+            tempo_fim = time.time()
+            tempo_duracao = tempo_fim - tempo_inicial
+
+            if tempo_fim - tempo_inicial > timeout:
+                print("Time out!")
+                com1.sendData(datagrama(5, 0, 0, 0))
+                com1.disable()
+                break
+            com1.rx.getBufferLen()
+        for num in range(0, divide_pacotes(txBuffer)[1]):
+            com1.sendData(datagrama(3, num, divide_pacotes(txBuffer)[1], np.asarray(divide_pacotes(txBuffer)[0][num])))
+
+
         #aqui você deverá gerar os dados a serem transmitidos. 
         #seus dados a serem transmitidos são um array bytes a serem transmitidos. Gere esta lista com o 
         #nome de txBuffer. Esla sempre irá armazenar os dados a serem enviados.
-
-       # head = b'\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-       # payload = "./img/.jpg"
-       # eop = b'\0xAA\0xBB\0xAA\0xBB'
-       # datagrama = head + payload + eop
 
         #txBuffer = imagem em bytes!
         txBuffer = datagrama  #isso é um array de bytes
@@ -125,3 +152,18 @@ def main():
     #so roda o main quando for executado do terminal ... se for chamado dentro de outro modulo nao roda
 if __name__ == "__main__":
     main()
+
+
+
+
+
+
+
+
+
+
+# O client deve ser capaz de enviar ao menos 2 arquivos na execução da aplicação.
+# 4) Os nomes dos arquivos debem ser transmitidos e salvos com o mesmo nome (use nomes curtos ou
+# numéricos)
+#  Se durante a transmissão os fios que conectam os arduinos forem desconectados e reconectados, a
+# transmissão deve continuar após a reconexão. 
