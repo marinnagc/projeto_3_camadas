@@ -66,38 +66,41 @@ def main():
 
             return dtg
 
-        com1.sendData(datagrama(1, 0, divide_pacotes(txBuffer)[1], 0)) #envia o convite para o servidor
+        com1.sendData(datagrama(1, 0, divide_pacotes(txBuffer)[1], 0)) #envia o convite para o servidor (handshake)
+        h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
+        if h[0] == 2:
+            timeout = 10
+            rx = RX(fisica)
+            tempo_inicial = time.time()
+            tempo_duracao = 0
+            while com1.rx.getBufferLen() < 1:
+                tempo_fim = time.time()
+                tempo_inicial = time.time()
+                tempo_duracao = 0
+                tempo_duracao = tempo_fim - tempo_inicial
+                com1.sendData(datagrama(3,1,divide_pacotes(txBuffer)[1],divide_pacotes(txBuffer)[0][0])) #envia o primeiro pacote 
+                for i in range(1, divide_pacotes(txBuffer)[1]):
+                    head,_ = com1.getData(10) #pega o head
+                    payload,_ = com1.getData(len(divide_pacotes(txBuffer)[0][i])) #pega o payload
+                    ceop,_ =com1.getData(4) #pega o ceop
+                    if head[0] == 5:
+                        print("Time out!")
+                        com1.disable()
+                        break
+                    elif head[0] == 6:
+                        com1.sendData(datagrama(3, head[1], divide_pacotes(txBuffer)[1], divide_pacotes(txBuffer)[0][head[1]-1]))
+                    elif head[0] == 7 or head[0] == 8:
+                        com1.sendData(datagrama(3, head[1], divide_pacotes(txBuffer)[1], divide_pacotes(txBuffer)[0][head[1]]))
+                    elif head[0] == 4:
+                        com1.sendData(datagrama(3, i, divide_pacotes(txBuffer)[1], divide_pacotes(txBuffer)[0][i+1])) #envia o proximo pacote
 
-        rxBuffer, nRx = com1.getData(2) #recebe a resposta do servidor
-        while rxBuffer[0] != b'\x02':
-            rxBuffer, nRx = com1.getData(2)
-                
-        if rxBuffer[0] == b'\x05':
-            print("Time out!")
-            com1.disable()
-
-        if rxBuffer[0] == b'\x06':
-            print("Pacote incorreto!, o pacote esperado era {}" .format(rxBuffer[1]))
-
-        timeout = 10
-        rx = RX(fisica)
-        tempo_inicial = time.time()
-        tempo_duracao = 0
-        while com1.rx.getBufferLen() < 1:
-            #print(com1.rx.getBufferLen())
-            tempo_fim = time.time()
-            tempo_duracao = tempo_fim - tempo_inicial
-
-            if tempo_fim - tempo_inicial > timeout:
-                print("Time out!")
-                com1.sendData(datagrama(5, 0, 0, 0))
-                com1.disable()
-                break
-            com1.rx.getBufferLen()
-        for num in range(0, divide_pacotes(txBuffer)[1]):
-            com1.sendData(datagrama(3, num, divide_pacotes(txBuffer)[1], np.asarray(divide_pacotes(txBuffer)[0][num])))
-
-
+                if tempo_fim - tempo_inicial > timeout:
+                    print("Time out!")
+                    com1.sendData(datagrama(5, 0, 0, 0))
+                    com1.disable()
+                    break
+                com1.rx.getBufferLen()
+       
         #aqui você deverá gerar os dados a serem transmitidos. 
         #seus dados a serem transmitidos são um array bytes a serem transmitidos. Gere esta lista com o 
         #nome de txBuffer. Esla sempre irá armazenar os dados a serem enviados.
