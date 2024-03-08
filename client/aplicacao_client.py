@@ -14,7 +14,7 @@ from enlace import *
 import time
 import numpy as np
 import random
-
+import datetime
 
 # voce deverá descomentar e configurar a porta com através da qual ira fazer comunicaçao
 #   para saber a sua porta, execute no terminal :
@@ -69,8 +69,17 @@ def main():
 
             return dtg
 
+        def escrever_log(mensagem, nome_arquivo="log.txt"):
+            """
+            Escreve uma mensagem de log com timestamp em um arquivo especificado.
+            """
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open(nome_arquivo, "a") as arquivo_log:
+                arquivo_log.write(f"[{timestamp}] {mensagem}\n")
+
         def envia_img(numero_img, img):
             com1.sendData(datagrama(1, 0, divide_pacotes(img)[1], 0, numero_img)) #envia o convite para o servidor (handshake)
+            escrever_log(f"Convite enviado para o servidor.", "log_cliente.txt")
             h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
             if h[0] == 2:
                 timeout = 10
@@ -83,24 +92,28 @@ def main():
                     tempo_duracao = 0
                     tempo_duracao = tempo_fim - tempo_inicial
                     com1.sendData(datagrama(3,1,divide_pacotes(img)[1],divide_pacotes(img)[0][0], numero_img)) #envia o primeiro pacote 
+                    escrever_log(f"Tem-se início o envio do arquivo de extensâo {len(img)}", "log_cliente.txt")
                     for i in range(1, divide_pacotes(img)[1]):
                         head,_ = com1.getData(10) #pega o head
                         payload,_ = com1.getData(len(divide_pacotes(img)[0][i])) #pega o payload
                         ceop,_ =com1.getData(4) #pega o ceop
                         if head[0] == 5:
-                            print("Time out!")
+                            escrever_log("Time out.", "log_cliente.txt")
                             com1.disable()
                             break
                         elif head[0] == 6:
+                            escrever_log(f"Número do pacote esperado incorreto.", "log_cliente.txt")
                             com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]-1], numero_img))
-                        elif head[0] == 7 or head[0] == 8:
+                        elif head[0] == 7:
+                            escrever_log(f"Erro na transmissao do pacote {head[1]}. Reenviá-lo.", "log_cliente.txt")
                             com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]], numero_img))
                         elif head[0] == 4:
+                            escrever_log(f"Pacote {head[1]} enviado.", "log_cliente.txt")
                             com1.sendData(datagrama(3, i, divide_pacotes(img)[1], divide_pacotes(img)[0][i+1], numero_img)) #envia o proximo pacote
                         if i == divide_pacotes(img)[1]:
                             numero_img += 1
                     if tempo_fim - tempo_inicial > timeout:
-                        print("Time out!")
+                        escrever_log("Time out.", "log_cliente.txt")
                         com1.sendData(datagrama(5, 0, 0, 0, 0))
                         com1.disable()
                         break
