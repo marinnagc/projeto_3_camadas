@@ -37,10 +37,10 @@ def main():
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
-        imageR = "./img/llama1kb.jpg" #img a ser transmitida
+        image1 = "./img/llama1kb.jpg" #img a ser transmitida
         #carrega a img
         print("carregando imagem para transmissão: ")
-        txBuffer = open(imageR,"rb").read() #imagem em bytes!
+        txBuffer1 = open(image1,"rb").read() #imagem em bytes!
 
         def divide_pacotes(txBuffer):
             pacotes= []
@@ -166,7 +166,5 @@ if __name__ == "__main__":
 
 
 # O client deve ser capaz de enviar ao menos 2 arquivos na execução da aplicação.
-# 4) Os nomes dos arquivos debem ser transmitidos e salvos com o mesmo nome (use nomes curtos ou
-# numéricos)
-#  Se durante a transmissão os fios que conectam os arduinos forem desconectados e reconectados, a
-# transmissão deve continuar após a reconexão. 
+# 4) Os nomes dos arquivos debem ser transmitidos e salvos com o mesmo nome (use nomes curtos ou numéricos)
+# Se durante a transmissão os fios que conectam os arduinos forem desconectados e reconectados, a transmissão deve continuar após a reconexão. 
