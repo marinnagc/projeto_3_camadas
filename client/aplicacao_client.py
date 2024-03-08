@@ -34,6 +34,10 @@ def main():
         
         # Ativa comunicacao. Inicia os threads e a comunicação seiral 
         com1.enable()
+
+        time.sleep(.2)
+        com1.sendData(b'00')
+        time.sleep(1)
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 

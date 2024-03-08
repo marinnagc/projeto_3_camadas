@@ -22,7 +22,7 @@ import datetime
 # se estiver usando windows, o gerenciador de dispositivos informa a porta
 
 
-serialName = "COM3"                  # Windows(variacao de)
+serialName = "COM6"                  # Windows(variacao de)
 
 
 def main():
@@ -34,6 +34,12 @@ def main():
         
         # Ativa comunicacao. Inicia os threads e a comunicação seiral 
         com1.enable()
+        
+        print("esperando o primeiro byte de sacrifício")
+        rxBuffer, nRx = com1.getData(1)
+        print("oi")
+        com1.rx.clearBuffer()
+        time.sleep(.1)
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
