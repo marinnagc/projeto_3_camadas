@@ -86,7 +86,7 @@ def main():
         escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
 
         h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
-        
+
         while h[0] == 1:
             time.sleep(1)
             h,_ = com1.getData(10)
@@ -102,7 +102,7 @@ def main():
             tempo_inicial = time.time()
             tempo_duracao = 0
             tempo_duracao = tempo_fim - tempo_inicial
-            com1.sendData(datagrama(3,1)) #envia o primeiro pacote 
+            com1.sendData(datagrama(4,1)) #envia o primeiro pacote 
             conteudo_img = bytearray()
             for i in range(1, total_pacotes_receb-1):
                 head,_ = com1.getData(10) #pega o head
