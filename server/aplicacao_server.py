@@ -58,32 +58,46 @@ def main():
                 head = b'\x08\x00\x00\x00\x00\x00\x00\x00\x00\x00'
                 dtg = head+ceop
             return dtg
+        
+        def salva_img(numero_img):
+            numero_img = int.from_bytes(numero_img, "big")
+            img = f'./img/{numero_img}.jpg'
+            f = open(img, "wb")
+            f.write(conteudo_img)
+            f.close()
 
         head, _ = com1.getData(10) #recebe o convite do client
         if head[0] == 1 and head[1] == 255:
             total_pacotes_receb = head[1]
+            numero_img = head[3]
             com1.sendData(datagrama(2, 0, 0, 0)) # aceita o convite
 
         h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
+            
         if h[0] == 3:
             timeout = 10
             rx = RX(fisica)
             tempo_inicial = time.time()
             tempo_duracao = 0
             while com1.rx.getBufferLen() < 1:
+                tempo_fim = 0
                 tempo_fim = time.time()
+                tempo_inicial = 0
                 tempo_inicial = time.time()
                 tempo_duracao = 0
                 tempo_duracao = tempo_fim - tempo_inicial
                 com1.sendData(datagrama(3,1,0,0)) #envia o primeiro pacote 
+                conteudo_img = bytearray()
                 for i in range(1, total_pacotes_receb-1):
                     head,_ = com1.getData(10) #pega o head
                     payload,_ = com1.getData(head[3]) #pega o payload
                     ceop,_ =com1.getData(4) #pega o ceop
+                    conteudo_img += payload
                     if head[0] == 5:
                         print("Time out!")
                         com1.disable()
                         break
+                salva_img(numero_img)
 
                 if tempo_fim - tempo_inicial > timeout:
                     print("Time out!")
@@ -91,36 +105,17 @@ def main():
                     com1.disable()
                     break
                 com1.rx.getBufferLen()
-           
-        #aqui você deverá gerar os dados a serem transmitidos. 
-        #seus dados a serem transmitidos são um array bytes a serem transmitidos. Gere esta lista com o 
-        #nome de txBuffer. Esla sempre irá armazenar os dados a serem enviados.
+                print("Tempo de envio: ", tempo_duracao)
 
         #txBuffer = imagem em bytes!
         txBuffer = datagrama  #isso é um array de bytes
        
         print("meu array de bytes tem tamanho {}" .format(len(txBuffer)))
-        #faça aqui uma conferência do tamanho do seu txBuffer, ou seja, quantos bytes serão enviados.
-            
-        #finalmente vamos transmitir os todos. Para isso usamos a funçao sendData que é um método da camada enlace.
-        #faça um print para avisar que a transmissão vai começar.
-        #tente entender como o método send funciona!
-        #Cuidado! Apenas trasmita arrays de bytes!
-               
         
         com1.sendData(np.asarray(txBuffer))  #as array apenas como boa pratica para casos de ter uma outra forma de dados
           
-        # A camada enlace possui uma camada inferior, TX possui um método para conhecermos o status da transmissão
-        # O método não deve estar fincionando quando usado como abaixo. deve estar retornando zero. Tente entender como esse método funciona e faça-o funcionar.
         txSize = com1.tx.getStatus()
         print('enviou = {}' .format(txSize))
-        
-        #Agora vamos iniciar a recepção dos dados. Se algo chegou ao RX, deve estar automaticamente guardado
-        #Observe o que faz a rotina dentro do thread RX
-        #print um aviso de que a recepção vai começar.
-        
-        #Será que todos os bytes enviados estão realmente guardadas? Será que conseguimos verificar?
-        #Veja o que faz a funcao do enlaceRX  getBufferLen
       
         #acesso aos bytes recebidos
         txLen = len(txBuffer)
@@ -147,9 +142,9 @@ if __name__ == "__main__":
     main()
 
 
-# enviei uma foto, como faco p enviar outra
-# computar/mostrar tempo
-# razao entre tamanhos dos arquivos 
+# enviei uma foto, como faco p enviar outra CHECK
+# computar/mostrar tempo CHECK
+# razao entre tamanhos dos arquivos CHECK
 # tirar os fios
 # #Dois arquivos de log deve ser gerado durante a transmissão de cada arquivo. Um no client e outro no
 # server. No arquivo deverá haver o registro de todas as intercorrências: pacote enviado com problema,
