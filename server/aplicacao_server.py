@@ -85,44 +85,45 @@ def main():
             numero_img = head[3]
             com1.sendData(datagrama(2, 0)) # aceita o convite
         escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
-
-        h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
-
-        while h[0] == 1:
+        print('sla')
+        #h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
+        print(head)
+        while head[0] == 1:
             time.sleep(1)
-            h,_ = com1.getData(10)
+            print("esperando msg")
+            head,_ = com1.getData(10)
 
-        timeout = 10
-        rx = RX(fisica)
-        tempo_inicial = time.time()
-        tempo_duracao = 0
-        while com1.rx.getBufferLen() > 0:
-            tempo_fim = 0
-            tempo_fim = time.time()
-            tempo_inicial = 0
+        if head[0]==3 or head[0]==5:
+            timeout = 10
             tempo_inicial = time.time()
             tempo_duracao = 0
-            tempo_duracao = tempo_fim - tempo_inicial
-            com1.sendData(datagrama(4,1)) #envia o primeiro pacote 
-            conteudo_img = bytearray()
-            for i in range(1, total_pacotes_receb-1):
-                head,_ = com1.getData(10) #pega o head
-                payload,_ = com1.getData(head[3]) #pega o payload
-                ceop,_ =com1.getData(4) #pega o ceop
-                conteudo_img += payload
-                if head[0] == 5:
+            while com1.rx.getBufferLen() > 0:
+                tempo_fim = 0
+                tempo_fim = time.time()
+                tempo_inicial = 0
+                tempo_inicial = time.time()
+                tempo_duracao = 0
+                tempo_duracao = tempo_fim - tempo_inicial
+                com1.sendData(datagrama(4,1)) #envia o primeiro pacote 
+                conteudo_img = bytearray()
+                for i in range(1, total_pacotes_receb-1):
+                    head,_ = com1.getData(10) #pega o head
+                    payload,_ = com1.getData(head[3]) #pega o payload
+                    ceop,_ =com1.getData(4) #pega o ceop
+                    conteudo_img += payload
+                    if head[0] == 5:
+                        escrever_log(f"Time out.", "log_server.txt")
+                        com1.disable()
+                        break
+                nova_img = salva_img(numero_img)
+                escrever_log(f"Recebeu o arquivo de extensâo {len(nova_img)}", "log_server.txt")
+
+                if tempo_fim - tempo_inicial > timeout:
                     escrever_log(f"Time out.", "log_server.txt")
+                    com1.sendData(datagrama(5, 0))
                     com1.disable()
                     break
-            nova_img = salva_img(numero_img)
-            escrever_log(f"Recebeu o arquivo de extensâo {len(nova_img)}", "log_server.txt")
-
-            if tempo_fim - tempo_inicial > timeout:
-                escrever_log(f"Time out.", "log_server.txt")
-                com1.sendData(datagrama(5, 0))
-                com1.disable()
-                break
-            com1.rx.getBufferLen()
+                com1.rx.getBufferLen()
             print("Tempo de envio: ", tempo_duracao)
         
         # Encerra comunicação
