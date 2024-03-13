@@ -24,7 +24,41 @@ import datetime
 
 serialName = "COM6"                  # Windows(variacao de)
 
+def datagrama(tipo, num_ultimo_pacote):
+    ceop = b'\xAA\xBB\xAA\xBB'
+    if tipo == 2: # quero dados, pode me mandar
+        head = b'\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+        dtg = head+ceop
+    elif tipo == 4: # recebi dados corretos e printei o numero do ultimo pacote recebido
+        head = b'\x04'+ bytes(num_ultimo_pacote) + b'\x00\x00\x00\x00\x00\x00\x00\x00'
+        dtg = head+ceop
+    elif tipo == 5: # mensagem de time out
+        head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
+        dtg = head+ceop
+    elif tipo == 6: # numero do pacote esperado incorreto
+        head = b'\x06' + bytes(num_ultimo_pacote+1)+b'\x00\x00\x00\x00\x00\x00\x00\x00'
+        dtg = head+ceop
+    elif tipo == 7:  # ceop esta com problema ou pacote fora de ordem
+        head = b'\x07' + bytes(num_ultimo_pacote) + b'\x00\x00\x00\x00\x00\x00\x00\x00'
+        dtg = head+ceop
+    return dtg
 
+def salva_img(numero_img, conteudo_img):
+    numero_img = int.from_bytes(numero_img, "big")
+    nova_img = f'./img/{numero_img}.jpg'
+    f = open(nova_img, "wb")
+    f.write(conteudo_img)
+    f.close()
+    return nova_img
+
+def escrever_log(mensagem, nome_arquivo="log.txt"):
+    """
+    Escreve uma mensagem de log com timestamp em um arquivo especificado.
+    """
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(nome_arquivo, "a") as arquivo_log:
+        arquivo_log.write(f"[{timestamp}] {mensagem}\n")
+        
 def main():
     try:
         print("Iniciou o main")
@@ -43,40 +77,7 @@ def main():
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
-        def datagrama(tipo, num_ultimo_pacote):
-            ceop = b'\xAA\xBB\xAA\xBB'
-            if tipo == 2: # quero dados, pode me mandar
-                head = b'\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-                dtg = head+ceop
-            elif tipo == 4: # recebi dados corretos e printei o numero do ultimo pacote recebido
-                head = b'\x04'+ bytes(num_ultimo_pacote) + b'\x00\x00\x00\x00\x00\x00\x00\x00'
-                dtg = head+ceop
-            elif tipo == 5: # mensagem de time out
-                head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
-                dtg = head+ceop
-            elif tipo == 6: # numero do pacote esperado incorreto
-                head = b'\x06' + bytes(num_ultimo_pacote+1)+b'\x00\x00\x00\x00\x00\x00\x00\x00'
-                dtg = head+ceop
-            elif tipo == 7:  # ceop esta com problema ou pacote fora de ordem
-                head = b'\x07' + bytes(num_ultimo_pacote) + b'\x00\x00\x00\x00\x00\x00\x00\x00'
-                dtg = head+ceop
-            return dtg
-        
-        def salva_img(numero_img, conteudo_img):
-            numero_img = int.from_bytes(numero_img, "big")
-            nova_img = f'./img/{numero_img}.jpg'
-            f = open(nova_img, "wb")
-            f.write(conteudo_img)
-            f.close()
-            return nova_img
 
-        def escrever_log(mensagem, nome_arquivo="log.txt"):
-            """
-            Escreve uma mensagem de log com timestamp em um arquivo especificado.
-            """
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            with open(nome_arquivo, "a") as arquivo_log:
-                arquivo_log.write(f"[{timestamp}] {mensagem}\n")
                 
         head, _ = com1.getData(10) #recebe o convite do client
         if head[0] == 1 and head[1] == 255:
