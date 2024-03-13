@@ -28,7 +28,10 @@ def divide_pacotes(txBuffer):
     pacotes= []
     for i in range(0,len(txBuffer),140):
         pacote = txBuffer[i:i + 140]
+        if len(pacote) < 140:
+            pacote += b'\x00' * (140 - len(pacote))
         pacotes.append(pacote)
+
     return pacotes, len(pacotes)
 
 # num e o numero de pacote atual
@@ -40,7 +43,7 @@ def datagrama(tipo, num, total_pacotes, dados, numero_img):
         dtg = head+ceop
     elif tipo == 3: # envio de pacotes (mostra x de y pacotes enviados)
         head = b'\x03'+ (num).to_bytes(1, 'big') + (total_pacotes).to_bytes(1, 'big') + (len(dados)).to_bytes(1, 'big')+ b'\x00\x00\x00\x00\x00\x00'
-        payload_1 = np.asarray(dados)
+        payload_1 = dados
         dtg = head+payload_1+ceop
     elif tipo == 5: # mensagem de time out
         head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
@@ -90,16 +93,14 @@ def main():
                 timeout = 10
                 tempo_inicial = time.time()
                 tempo_duracao = 0
-                print(" entrou no if")
                 while com1.rx.getBufferLen() > 0:
-                    print("entrou no while")
                     tempo_fim = time.time()
                     tempo_inicial = time.time()
                     tempo_duracao = 0
                     tempo_duracao = tempo_fim - tempo_inicial
-                    com1.sendData(datagrama(3,1,divide_pacotes(img)[1],divide_pacotes(img)[0][0], numero_img)) #envia o primeiro pacote 
                     escrever_log(f"Tem-se início o envio do arquivo de extensâo {len(img)}", "log_cliente.txt")
-                    for i in range(1, divide_pacotes(img)[1]):
+                    for i in range(0, divide_pacotes(img)[1]):
+                        com1.sendData(datagrama(3,i+1,divide_pacotes(img)[1],divide_pacotes(img)[0][i], numero_img)) #envia o primeiro pacote
                         head,_ = com1.getData(10) #pega o head
                         payload,_ = com1.getData(len(divide_pacotes(img)[0][i])) #pega o payload
                         ceop,_ =com1.getData(4) #pega o ceop
