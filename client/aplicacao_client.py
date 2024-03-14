@@ -85,7 +85,7 @@ def main():
         print("Imagem carregada")
 
         def envia_img(numero_img, img):
-
+            
             com1.sendData(datagrama(1, 0, divide_pacotes(img)[1], 0, numero_img)) #envia o convite para o servidor (handshake)
             escrever_log(f"Convite enviado para o servidor.", "log_cliente.txt")
             h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
@@ -101,8 +101,9 @@ def main():
                     escrever_log(f"Tem-se início o envio do arquivo de extensâo {len(img)}", "log_cliente.txt")
                     for i in range(0, divide_pacotes(img)[1]):
                         com1.sendData(datagrama(3,i+1,divide_pacotes(img)[1],divide_pacotes(img)[0][i], numero_img)) #envia o primeiro pacote
+                        com1.rx.clearBuffer()
                         head,_ = com1.getData(10) #pega o head
-                        payload,_ = com1.getData(len(divide_pacotes(img)[0][i])) #pega o payload
+                        print(head)
                         ceop,_ =com1.getData(4) #pega o ceop
                         if head[0] == 5:
                             escrever_log("Time out.", "log_cliente.txt")
