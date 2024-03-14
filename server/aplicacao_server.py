@@ -81,40 +81,56 @@ def main():
                 
         head, _ = com1.getData(10) #recebe o convite do client
         if head[0] == 1 and head[1] == 255:
-            total_pacotes_receb = head[1]
+            total_pacotes = head[1]
             numero_img = head[3]
             com1.sendData(datagrama(2, 0)) # aceita o convite
         escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
         print('sla')
         #h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
-        print(head)
+        com1.rx.clearBuffer()
         while head[0] == 1:
+            com1.rx.clearBuffer()
             time.sleep(1)
             print("esperando msg")
             head,_ = com1.getData(10)
-
+        print(head,head[0])
         if head[0]==3 or head[0]==5:
             timeout = 10
             tempo_inicial = time.time()
             tempo_duracao = 0
             while com1.rx.getBufferLen() > 0:
+                print("entrou no while")
                 tempo_fim = 0
                 tempo_fim = time.time()
                 tempo_inicial = 0
                 tempo_inicial = time.time()
                 tempo_duracao = 0
                 tempo_duracao = tempo_fim - tempo_inicial
-                com1.sendData(datagrama(4,1)) #envia o primeiro pacote 
+                com1.sendData(datagrama(4,1)) #envia que o pacote veio certo
+                print('pacote veio certo')
                 conteudo_img = bytearray()
-                for i in range(1, total_pacotes_receb-1):
+                cont=1
+                for i in range(1, total_pacotes-1):
+                    print("entrou no for")
                     head,_ = com1.getData(10) #pega o head
                     payload,_ = com1.getData(head[3]) #pega o payload
                     ceop,_ =com1.getData(4) #pega o ceop
                     conteudo_img += payload
+                    com1.rx.clearBuffer() #VERIFICAR
                     if head[0] == 5:
                         escrever_log(f"Time out.", "log_server.txt")
                         com1.disable()
                         break
+                    elif head[0] == 3:
+                        if ceop != b'\xAA\xBB\xAA\xBB':
+                            com1.sendData(datagrama(7,head[1]))
+                        elif head[1] != cont:
+                            com1.sendData(datagrama(6,cont))
+                        elif ceop != b'\xAA\xBB\xAA\xBB' and  head[1] == cont:
+                            com1.sendData(datagrama(4,cont))
+
+
+                cont+=1
                 nova_img = salva_img(numero_img)
                 escrever_log(f"Recebeu o arquivo de extensâo {len(nova_img)}", "log_server.txt")
 
