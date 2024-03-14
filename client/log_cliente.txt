@@ -1,138 +1,65 @@
-[2024-03-08 17:17:55] Convite enviado para o servidor.
-[2024-03-08 17:18:42] Convite enviado para o servidor.
-[2024-03-08 17:34:50] Convite enviado para o servidor.
-[2024-03-08 17:35:10] Convite enviado para o servidor.
-[2024-03-08 17:42:29] Convite enviado para o servidor.
-[2024-03-08 17:45:53] Convite enviado para o servidor.
-[2024-03-08 17:47:45] Convite enviado para o servidor.
-[2024-03-08 17:50:36] Convite enviado para o servidor.
-[2024-03-08 17:52:02] Convite enviado para o servidor.
-[2024-03-08 17:57:24] Convite enviado para o servidor.
-[2024-03-08 17:57:49] Convite enviado para o servidor.
-[2024-03-08 17:58:56] Convite enviado para o servidor.
-[2024-03-08 17:59:22] Convite enviado para o servidor.
-[2024-03-08 18:00:02] Convite enviado para o servidor.
-[2024-03-08 18:00:53] Convite enviado para o servidor.
-[2024-03-13 18:15:41] Convite enviado para o servidor.
-[2024-03-13 18:17:21] Convite enviado para o servidor.
-[2024-03-13 18:18:36] Convite enviado para o servidor.
-[2024-03-13 18:22:31] Convite enviado para o servidor.
-[2024-03-13 18:29:07] Convite enviado para o servidor.
-[2024-03-13 18:32:13] Convite enviado para o servidor.
-[2024-03-13 18:33:25] Convite enviado para o servidor.
-[2024-03-13 18:33:58] Convite enviado para o servidor.
-[2024-03-13 18:38:39] Convite enviado para o servidor.
-[2024-03-13 18:41:00] Convite enviado para o servidor.
-[2024-03-13 18:41:33] Convite enviado para o servidor.
-[2024-03-13 18:47:20] Convite enviado para o servidor.
-[2024-03-13 19:03:18] Convite enviado para o servidor.
-[2024-03-13 19:03:18] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:04:20] Convite enviado para o servidor.
-[2024-03-13 19:04:20] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:04:40] Convite enviado para o servidor.
-[2024-03-13 19:04:41] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:08:06] Convite enviado para o servidor.
-[2024-03-13 19:08:31] Convite enviado para o servidor.
-[2024-03-13 19:09:19] Convite enviado para o servidor.
-[2024-03-13 19:09:40] Convite enviado para o servidor.
-[2024-03-13 19:09:40] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:11:26] Convite enviado para o servidor.
-[2024-03-13 19:11:26] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:12:08] Convite enviado para o servidor.
-[2024-03-13 19:12:09] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:20:22] Convite enviado para o servidor.
-[2024-03-13 19:20:22] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:22:25] Convite enviado para o servidor.
-[2024-03-13 19:22:25] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:23:34] Convite enviado para o servidor.
-[2024-03-13 19:23:34] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:24:44] Convite enviado para o servidor.
-[2024-03-13 19:24:45] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:26:46] Convite enviado para o servidor.
-[2024-03-13 19:26:46] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:30:00] Convite enviado para o servidor.
-[2024-03-13 19:30:00] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:32:32] Convite enviado para o servidor.
-[2024-03-13 19:34:02] Convite enviado para o servidor.
-[2024-03-13 19:34:02] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:35:39] Convite enviado para o servidor.
-[2024-03-13 19:35:50] Convite enviado para o servidor.
-[2024-03-13 19:35:50] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:37:19] Convite enviado para o servidor.
-[2024-03-13 19:37:19] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:39:11] Convite enviado para o servidor.
-[2024-03-13 19:39:11] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:40:36] Convite enviado para o servidor.
-[2024-03-13 19:40:36] Convite enviado para o servidor.
-[2024-03-13 19:41:19] Convite enviado para o servidor.
-[2024-03-13 19:41:20] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:43:27] Convite enviado para o servidor.
-[2024-03-13 19:43:27] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:46:40] Convite enviado para o servidor.
-[2024-03-13 19:47:10] Convite enviado para o servidor.
-[2024-03-13 19:47:10] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-13 19:47:12] Pacote 0 enviado.
-[2024-03-14 11:40:34] Convite enviado para o servidor.
-[2024-03-14 11:40:34] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:40:35] Pacote 0 enviado.
-[2024-03-14 11:42:43] Convite enviado para o servidor.
-[2024-03-14 11:42:43] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:42:44] Pacote 0 enviado.
-[2024-03-14 11:54:08] Convite enviado para o servidor.
-[2024-03-14 11:54:08] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:54:09] Pacote 0 enviado.
-[2024-03-14 11:54:45] Convite enviado para o servidor.
-[2024-03-14 11:54:45] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:54:46] Pacote 0 enviado.
-[2024-03-14 11:56:00] Convite enviado para o servidor.
-[2024-03-14 11:56:00] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:59:13] Convite enviado para o servidor.
-[2024-03-14 11:59:13] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:59:53] Convite enviado para o servidor.
-[2024-03-14 11:59:53] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 11:59:55] Pacote 0 enviado.
-[2024-03-14 12:01:08] Convite enviado para o servidor.
-[2024-03-14 12:01:08] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 12:02:37] Convite enviado para o servidor.
-[2024-03-14 12:02:37] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 12:02:38] Pacote 0 enviado.
-[2024-03-14 12:03:14] Convite enviado para o servidor.
-[2024-03-14 12:03:14] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 12:03:15] Pacote 0 enviado.
-[2024-03-14 12:03:29] Convite enviado para o servidor.
-[2024-03-14 12:03:29] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 12:03:44] Convite enviado para o servidor.
-[2024-03-14 12:03:45] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 12:03:46] Pacote 0 enviado.
-[2024-03-14 12:04:05] Convite enviado para o servidor.
-[2024-03-14 12:04:05] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 12:04:14] Convite enviado para o servidor.
-[2024-03-14 12:04:14] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:02:53] Convite enviado para o servidor.
-[2024-03-14 14:02:53] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:04:25] Convite enviado para o servidor.
-[2024-03-14 14:04:25] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:05:12] Convite enviado para o servidor.
-[2024-03-14 14:05:12] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:05:13] Pacote 1 enviado.
-[2024-03-14 14:05:41] Convite enviado para o servidor.
-[2024-03-14 14:05:41] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:05:58] Convite enviado para o servidor.
-[2024-03-14 14:05:58] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:06:12] Convite enviado para o servidor.
-[2024-03-14 14:06:13] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:06:14] Pacote 1 enviado.
-[2024-03-14 14:06:41] Convite enviado para o servidor.
-[2024-03-14 14:06:41] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:06:53] Convite enviado para o servidor.
-[2024-03-14 14:06:53] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:06:54] Pacote 1 enviado.
-[2024-03-14 14:07:29] Convite enviado para o servidor.
-[2024-03-14 14:07:29] Tem-se início o envio do arquivo de extensâo 965
-[2024-03-14 14:07:30] Pacote 1 enviado.
-[2024-03-14 14:07:31] Número do pacote esperado incorreto.
-[2024-03-14 14:07:31] Pacote 2 enviado.
-[2024-03-14 14:07:32] Número do pacote esperado incorreto.
-[2024-03-14 14:07:32] Pacote 4 enviado.
-[2024-03-14 14:07:33] Número do pacote esperado incorreto.
-[2024-03-14 14:07:33] Pacote 6 enviado.
+[2024-03-14 14:44:41] Convite enviado para o servidor.
+[2024-03-14 14:44:41] Convite enviado para o servidor.
+[2024-03-14 14:46:09] Convite enviado para o servidor.
+[2024-03-14 14:46:09] Convite enviado para o servidor.
+[2024-03-14 14:46:50] Convite enviado para o servidor.
+[2024-03-14 14:46:50] Convite enviado para o servidor.
+[2024-03-14 14:47:57] Convite enviado para o servidor.
+[2024-03-14 14:49:44] Convite enviado para o servidor.
+[2024-03-14 14:49:44] Convite enviado para o servidor.
+[2024-03-14 14:54:18] Convite enviado para o servidor.
+[2024-03-14 14:54:19] Convite enviado para o servidor.
+[2024-03-14 14:55:21] Convite enviado para o servidor.
+[2024-03-14 14:55:21] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 14:56:23] Convite enviado para o servidor.
+[2024-03-14 14:56:24] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 14:56:51] Convite enviado para o servidor.
+[2024-03-14 14:56:51] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 14:57:26] Convite enviado para o servidor.
+[2024-03-14 14:57:26] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 14:58:17] Convite enviado para o servidor.
+[2024-03-14 14:58:17] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 14:59:57] Convite enviado para o servidor.
+[2024-03-14 14:59:57] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:01:07] Convite enviado para o servidor.
+[2024-03-14 15:01:07] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:01:45] Convite enviado para o servidor.
+[2024-03-14 15:01:45] Convite enviado para o servidor.
+[2024-03-14 15:03:02] Convite enviado para o servidor.
+[2024-03-14 15:03:02] Convite enviado para o servidor.
+[2024-03-14 15:03:38] Convite enviado para o servidor.
+[2024-03-14 15:03:38] Convite enviado para o servidor.
+[2024-03-14 15:03:54] Convite enviado para o servidor.
+[2024-03-14 15:03:54] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:04:51] Convite enviado para o servidor.
+[2024-03-14 15:04:52] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:05:52] Convite enviado para o servidor.
+[2024-03-14 15:05:52] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:06:14] Convite enviado para o servidor.
+[2024-03-14 15:06:15] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:07:08] Convite enviado para o servidor.
+[2024-03-14 15:07:09] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:13:06] Convite enviado para o servidor.
+[2024-03-14 15:13:06] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:14:03] Convite enviado para o servidor.
+[2024-03-14 15:14:03] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:14:04] Pacote 0 enviado.
+[2024-03-14 15:17:56] Convite enviado para o servidor.
+[2024-03-14 15:17:56] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:17:57] Pacote 0 enviado.
+[2024-03-14 15:18:32] Convite enviado para o servidor.
+[2024-03-14 15:18:32] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:18:33] Pacote 0 enviado.
+[2024-03-14 15:18:33] Número do pacote esperado incorreto.
+[2024-03-14 15:18:34] Número do pacote esperado incorreto.
+[2024-03-14 15:18:34] Número do pacote esperado incorreto.
+[2024-03-14 15:19:22] Convite enviado para o servidor.
+[2024-03-14 15:19:22] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:19:22] Pacote 0 enviado.
+[2024-03-14 15:19:23] Número do pacote esperado incorreto.
+[2024-03-14 15:19:24] Número do pacote esperado incorreto.
+[2024-03-14 15:19:24] Número do pacote esperado incorreto.
+[2024-03-14 15:20:59] Convite enviado para o servidor.
+[2024-03-14 15:20:59] Tem-se início o envio do arquivo de extensâo 965
+[2024-03-14 15:21:00] Pacote 0 enviado.
+[2024-03-14 15:21:00] Número do pacote esperado incorreto.
