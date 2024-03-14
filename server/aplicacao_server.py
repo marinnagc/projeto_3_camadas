@@ -89,11 +89,14 @@ def main():
         #h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
         com1.rx.clearBuffer()
         while head[0] == 1:
-            com1.rx.clearBuffer()
             time.sleep(1)
             print("esperando msg")
             head,_ = com1.getData(10)
-        print(head,head[0])
+            if head[0] == 3:
+                payload,_ = com1.getData(head[3])
+                ceop=com1.sendData(4)
+
+        #print(head,head[0])
         if head[0]==3 or head[0]==5:
             timeout = 10
             tempo_inicial = time.time()
@@ -110,25 +113,28 @@ def main():
                 print('pacote veio certo')
                 conteudo_img = bytearray()
                 cont=1
-                for i in range(1, total_pacotes-1):
+                for i in range(0, total_pacotes):
                     print("entrou no for")
                     head,_ = com1.getData(10) #pega o head
                     payload,_ = com1.getData(head[3]) #pega o payload
+                    print(head[0])
                     ceop,_ =com1.getData(4) #pega o ceop
                     conteudo_img += payload
-                    com1.rx.clearBuffer() #VERIFICAR
+                    #com1.rx.clearBuffer() #VERIFICAR
                     if head[0] == 5:
+                        cont+=1
                         escrever_log(f"Time out.", "log_server.txt")
                         com1.disable()
                         break
                     elif head[0] == 3:
+                        cont+=1
+                        print('tipo 3')
                         if ceop != b'\xAA\xBB\xAA\xBB':
                             com1.sendData(datagrama(7,head[1]))
                         elif head[1] != cont:
                             com1.sendData(datagrama(6,cont))
-                        elif ceop != b'\xAA\xBB\xAA\xBB' and  head[1] == cont:
-                            com1.sendData(datagrama(4,cont))
-
+                        else:
+                            com1.sendData(datagrama(4,cont-1))
 
                 cont+=1
                 nova_img = salva_img(numero_img)
