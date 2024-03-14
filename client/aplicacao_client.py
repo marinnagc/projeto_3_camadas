@@ -45,6 +45,7 @@ def datagrama(tipo, num, total_pacotes, dados, numero_img):
         head = b'\x03'+ (num).to_bytes(1, 'big') + (total_pacotes).to_bytes(1, 'big') + (len(dados)).to_bytes(1, 'big')+ b'\x00\x00\x00\x00\x00\x00'
         payload_1 = dados
         dtg = head+payload_1+ceop
+        print(total_pacotes)
     elif tipo == 5: # mensagem de time out
         head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
         dtg = head+ceop
