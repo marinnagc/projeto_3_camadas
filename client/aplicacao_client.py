@@ -75,7 +75,7 @@ def main():
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
-        image1 = "./img/1.jpg" #img a ser transmitida
+        image1 = "./img/1.png" #img a ser transmitida
         image2 = "./img/2.png" 
 
         #carrega a img
@@ -87,7 +87,6 @@ def main():
         def envia_img(numero_img, img):
             com1.sendData(datagrama(1, 0, divide_pacotes(img)[1], 0, numero_img)) #envia o convite para o servidor (handshake)
             escrever_log(f"Convite enviado para o servidor.", "log_cliente.txt")
-            print((datagrama(1, 0, divide_pacotes(img)[1], 0, numero_img)))
             h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
             ceop,_ =com1.getData(4) #pega o ceop
             if h[0] == 2:
@@ -101,7 +100,6 @@ def main():
                 escrever_log("Pacote 1 enviado.", "log_cliente.txt")
                 print("Pacote 1 enviado.")
                 i = 2
-                print("Numero de pacotes: ", (divide_pacotes(img)[1]))
                 while i <= (divide_pacotes(img)[1]) and tempo_duracao < timeout:
                     head,_ = com1.getData(10) #pega o head
                     print("head que server mandou pro cliente: ", head)
@@ -134,8 +132,11 @@ def main():
                         print("Pacote ", i)
                         escrever_log(f"Pacote {i} enviado.", "log_cliente.txt")
                         i += 1
-                escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")
-                if i == divide_pacotes(img)[1]:
+                if (i-1) == divide_pacotes(img)[1]:
+                    com1.getData(10)
+                    com1.getData(4)
+                    print(f"ultimo head mandado pelo server: ", head)
+                    escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")   
                     numero_img += 1
                 if tempo_fim - tempo_inicial > timeout:
                     escrever_log("Time out.", "log_cliente.txt")
