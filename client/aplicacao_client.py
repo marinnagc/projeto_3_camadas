@@ -22,7 +22,7 @@ import datetime
 # se estiver usando windows, o gerenciador de dispositivos informa a porta
 
 
-serialName = "COM3"                  # Windows(variacao de)
+serialName = "COM5"                  # Windows(variacao de)
 
 def divide_pacotes(txBuffer):
     pacotes= []
@@ -45,7 +45,6 @@ def datagrama(tipo, num, total_pacotes, dados, numero_img):
         head = b'\x03'+ (num).to_bytes(1, 'big') + (total_pacotes).to_bytes(1, 'big') + (len(dados)).to_bytes(1, 'big')+ b'\x00\x00\x00\x00\x00\x00'
         payload_1 = dados
         dtg = head+payload_1+ceop
-        print(total_pacotes)
     elif tipo == 5: # mensagem de time out
         head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
         dtg = head+ceop
@@ -86,9 +85,9 @@ def main():
         print("Imagem carregada")
 
         def envia_img(numero_img, img):
-            
             com1.sendData(datagrama(1, 0, divide_pacotes(img)[1], 0, numero_img)) #envia o convite para o servidor (handshake)
             escrever_log(f"Convite enviado para o servidor.", "log_cliente.txt")
+            print((datagrama(1, 0, divide_pacotes(img)[1], 0, numero_img)))
             h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
             ceop,_ =com1.getData(4) #pega o ceop
             if h[0] == 2:
@@ -97,18 +96,22 @@ def main():
                 tempo_inicial = time.time()
                 tempo_duracao = 0
                 tempo_duracao = tempo_fim - tempo_inicial
-                escrever_log(f"Tem-se início o envio do arquivo de extensâo {len(img)}", "log_cliente.txt")
-                for i in range(divide_pacotes(img)[1]):
-                    com1.sendData(datagrama(3,i+1,divide_pacotes(img)[1],divide_pacotes(img)[0][i], numero_img)) #envia o primeiro pacote
+                escrever_log(f"Tem-se início o envio do arquivo de extensâo {numero_img}", "log_cliente.txt")
+                com1.sendData(datagrama(3,1,divide_pacotes(img)[1],divide_pacotes(img)[0][0], numero_img)) #envia o primeiro pacote
+                escrever_log("Pacote 1 enviado.", "log_cliente.txt")
+                print("Pacote 1 enviado.")
+                i = 2
+                print("Numero de pacotes: ", (divide_pacotes(img)[1]))
+                while i <= (divide_pacotes(img)[1]) and tempo_duracao < timeout:
                     head,_ = com1.getData(10) #pega o head
-                    print(head)
+                    print("head que server mandou pro cliente: ", head)
                     ceop,_ =com1.getData(4) #pega o ceop
                     if head[0] == 5:
                         escrever_log("Time out.", "log_cliente.txt")
                         com1.disable()
                         break
                     elif head[0] == 6:
-                        escrever_log(f"Número do pacote esperado incorreto.", "log_cliente.txt")
+                        escrever_log(f"Número do pacote esperado incorreto. Enviando novamente o pacote requisitado", "log_cliente.txt")
                         com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]-1], numero_img))
                         head,_ = com1.getData(10)
                         ceop,_ =com1.getData(4)
@@ -127,10 +130,13 @@ def main():
                             head,_ = com1.getData(10)
                             ceop,_ =com1.getData(4)
                     elif head[0] == 4:
+                        com1.sendData(datagrama(3, i, divide_pacotes(img)[1], divide_pacotes(img)[0][i-1], numero_img)) #envia o proximo pacote
+                        print("Pacote ", i)
                         escrever_log(f"Pacote {i} enviado.", "log_cliente.txt")
-                        com1.sendData(datagrama(3, i, divide_pacotes(img)[1], divide_pacotes(img)[0][i+1], numero_img)) #envia o proximo pacote
-                    if i == divide_pacotes(img)[1]:
-                        numero_img += 1
+                        i += 1
+                escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")
+                if i == divide_pacotes(img)[1]:
+                    numero_img += 1
                 if tempo_fim - tempo_inicial > timeout:
                     escrever_log("Time out.", "log_cliente.txt")
                     com1.sendData(datagrama(5, 0, 0, 0, 0))
@@ -160,6 +166,4 @@ if __name__ == "__main__":
 
 
 
-# O client deve ser capaz de enviar ao menos 2 arquivos na execução da aplicação. CHECK
-# 4) Os nomes dos arquivos debem ser transmitidos e salvos com o mesmo nome (use nomes curtos ou numéricos) CHECK
 # Se durante a transmissão os fios que conectam os arduinos forem desconectados e reconectados, a transmissão deve continuar após a reconexão. 
