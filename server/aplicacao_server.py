@@ -43,14 +43,14 @@ def datagrama(tipo, num_ultimo_pacote):
         dtg = head+ceop
     return dtg
 
-def salva_img(numero_img, conteudo_img):
-    if numero_img == 1:
-        nova_img = f'./img/{numero_img}.jpg'
+def salva_img(imagem, conteudo_img):
+    if imagem == 1:
+        nova_img = f'./img/{imagem}.jpg'
         f = open(nova_img, "wb")
         f.write(conteudo_img)
         f.close()
-    elif numero_img ==2:
-        nova_img = f'./img/{numero_img}.png'
+    elif imagem ==2:
+        nova_img = f'./img/{imagem}.png'
         f = open(nova_img, "wb")
         f.write(conteudo_img)
         f.close()
@@ -82,63 +82,77 @@ def main():
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
+        imagem = 1
 
-                
-        head, _ = com1.getData(10) #recebe o convite do client
-        ceop, _ = com1.getData(4) #recebe o convite do client
-        if head[0] == 1 and head[1] == 255:
-            total_pacotes = head[1]
-            numero_img = head[3]
-            com1.sendData(datagrama(2, 0)) 
-            print("tipo2")# aceita o convite
-        escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
-        print('sla')
-        #h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
-        #com1.rx.clearBuffer()
+        while imagem<=2:
+            print("entrou")
+            head, _ = com1.getData(10) #recebe o convite do client
+            print(head[0],head[1])
+            ceop, _ = com1.getData(4) #recebe o convite do client
+            if head[0] == 1 and head[1] == 255:
+                total_pacotes = head[2]
+                #imagem = head[3]
+                com1.sendData(datagrama(2, 0)) 
+                print("tipo2")# aceita o convite
+            escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
+            print('sla')
+            #h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
+            #com1.rx.clearBuffer()
 
-        cont = 1
-        tempo_duracao=0
-        timeout=10
-        while cont <= total_pacotes and tempo_duracao< timeout:
-            print("entrou no while")
-            head, _ = com1.getData(10)
-            payload,_ = com1.getData(head[3])
-            ceop,_ = com1.getData(4)
-            print("head",head[0],head[1])
-            tempo_fim = 0
-            tempo_fim = time.time()
-            tempo_inicial = 0
-            tempo_inicial = time.time()
-            tempo_duracao = 0
-            tempo_duracao = tempo_fim - tempo_inicial
-            timeout = 10
-            #print("payload",payload)
-            #print("ceop",ceop)
-            conteudo_img = bytearray()
-            if head[0] == 5:
-                escrever_log(f"Time out.", "log_server.txt")
-                com1.disable()
-            elif head[0] == 3:
-                if ceop != b'\xAA\xBB\xAA\xBB':
-                    com1.sendData(datagrama(7,head[1]))
-                elif head[1] != cont:
-                    com1.sendData(datagrama(6,cont))
-                    print("tipo 6")
-                elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB':
-                    print('tipo 4')
-                    cont+=1
-                    conteudo_img += payload
-                    if head[1] == 7:
-                        break
-                    com1.sendData(datagrama(4,cont))
-            if tempo_fim - tempo_inicial > timeout:
-                escrever_log(f"Time out.", "log_server.txt")
-                com1.sendData(datagrama(5, 0))
-                com1.disable()
-                print("Tempo de envio: ", tempo_duracao)
+            cont = 1
+            tempo_duracao=0
+            timeout=10
+            while cont <= total_pacotes:# and tempo_duracao< timeout:
+                print(cont,total_pacotes)
+                print("entrou no while")
+                head, _ = com1.getData(10)    
+                print('1')
+                payload,_ = com1.getData(head[3])
+                print('2')
+                ceop,_ = com1.getData(4)
+                print('3')
+                print("head",head[0],head[1])
+                tempo_fim = 0
+                tempo_fim = time.time()
+                tempo_inicial = 0
+                tempo_inicial = time.time()
+                tempo_duracao = 0
+                tempo_duracao = tempo_fim - tempo_inicial
+                timeout = 10
+                #print("payload",payload)
+                #print("ceop",ceop)
+                conteudo_img = bytearray()
+                if head[0] == 5:
+                    escrever_log(f"Time out.", "log_server.txt")
+                    com1.disable()
+                elif head[0] == 3:
+                    if ceop != b'\xAA\xBB\xAA\xBB':
+                        com1.sendData(datagrama(7,head[1]))
+                    elif head[1] != cont:
+                        com1.sendData(datagrama(6,cont))
+                        print("tipo 6")
+                    elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB':
+                        print('tipo 4')
+                        cont+=1
+                        conteudo_img += payload
+                        if head[1] == total_pacotes:
+                            print(head)
+                            com1.sendData(datagrama(4,cont))
+                            salva_img(imagem,conteudo_img)
+                            escrever_log(f"Recebeu o arquivo de extensâo {imagem}", "log_server.txt")
+                            imagem = 2
+                            cont = total_pacotes +1
+                        else:
+                            com1.sendData(datagrama(4,cont))
+                if tempo_fim - tempo_inicial > timeout:
+                    escrever_log(f"Time out.", "log_server.txt")
+                    com1.sendData(datagrama(5, 0))
+                    com1.disable()
+                    print("Tempo de envio: ", tempo_duracao)
 
-        nova_img = salva_img(numero_img,conteudo_img)
-        escrever_log(f"Recebeu o arquivo de extensâo {len(nova_img)}", "log_server.txt")
+ 
+
+
         
         # Encerra comunicação
         print("-------------------------")
