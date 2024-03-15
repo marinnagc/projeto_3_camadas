@@ -123,12 +123,18 @@ def main():
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
                 elif head[0] == 3:
+                    tempo_fim = 0
+                    tempo_fim = time.time()
+                    tempo_duracao = 0
+                    tempo_duracao = tempo_fim - tempo_inicial
                     if ceop != b'\xAA\xBB\xAA\xBB':
                         com1.sendData(datagrama(7,head[1]))
                     elif head[1] != cont:
                         com1.sendData(datagrama(6,cont))
                         print("tipo 6")
                     elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB':
+                        tempo_inicial = 0
+                        tempo_inicial = time.time()
                         print('tipo 4')
                         cont+=1
                         conteudo_img += payload
