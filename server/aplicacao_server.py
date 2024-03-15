@@ -44,16 +44,10 @@ def datagrama(tipo, num_ultimo_pacote):
     return dtg
 
 def salva_img(imagem, conteudo_img):
-    if imagem == 1:
-        nova_img = f'./img/{imagem}.jpg'
-        f = open(nova_img, "wb")
-        f.write(conteudo_img)
-        f.close()
-    elif imagem ==2:
-        nova_img = f'./img/{imagem}.png'
-        f = open(nova_img, "wb")
-        f.write(conteudo_img)
-        f.close()
+    nova_img = f'./img/{imagem}.png'
+    f = open(nova_img, "wb")
+    f.write(conteudo_img)
+    f.close()
     return nova_img
 
 def escrever_log(mensagem, nome_arquivo="log.txt"):
@@ -85,6 +79,7 @@ def main():
         head, _ = com1.getData(10) #recebe o convite do client
         print(head[0],head[1])
         ceop, _ = com1.getData(4) #recebe o convite do client
+        conteudo_img = bytearray()
         imagem = 1
 
         while imagem<=2:
@@ -122,7 +117,8 @@ def main():
                 timeout = 10
                 #print("payload",payload)
                 #print("ceop",ceop)
-                conteudo_img = bytearray()
+                
+                print(conteudo_img)
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
@@ -141,6 +137,7 @@ def main():
                             com1.sendData(datagrama(4,cont))
                             salva_img(imagem,conteudo_img)
                             escrever_log(f"Recebeu o arquivo de extensâo {imagem}", "log_server.txt")
+                            conteudo_img = bytearray()
                             imagem = 2
                             cont = total_pacotes +1
                             print("bla")
