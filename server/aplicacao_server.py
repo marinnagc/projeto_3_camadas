@@ -82,13 +82,13 @@ def main():
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
         print("Abriu a comunicação")
 
+        head, _ = com1.getData(10) #recebe o convite do client
+        print(head[0],head[1])
+        ceop, _ = com1.getData(4) #recebe o convite do client
         imagem = 1
 
         while imagem<=2:
             print("entrou")
-            head, _ = com1.getData(10) #recebe o convite do client
-            print(head[0],head[1])
-            ceop, _ = com1.getData(4) #recebe o convite do client
             if head[0] == 1 and head[1] == 255:
                 total_pacotes = head[2]
                 #imagem = head[3]
@@ -105,13 +105,14 @@ def main():
             while cont <= total_pacotes:# and tempo_duracao< timeout:
                 print(cont,total_pacotes)
                 print("entrou no while")
+                print("head",head[0],head[1])
                 head, _ = com1.getData(10)    
                 print('1')
                 payload,_ = com1.getData(head[3])
                 print('2')
                 ceop,_ = com1.getData(4)
                 print('3')
-                print("head",head[0],head[1])
+                print("head2",head[0],head[1])
                 tempo_fim = 0
                 tempo_fim = time.time()
                 tempo_inicial = 0
@@ -142,6 +143,11 @@ def main():
                             escrever_log(f"Recebeu o arquivo de extensâo {imagem}", "log_server.txt")
                             imagem = 2
                             cont = total_pacotes +1
+                            print("bla")
+                            head, _ = com1.getData(10)
+                            print("bla1",head)
+                            ceop, _ = com1.getData(4)
+                            print("bla2",ceop)
                         else:
                             com1.sendData(datagrama(4,cont))
                 if tempo_fim - tempo_inicial > timeout:
