@@ -22,7 +22,7 @@ import datetime
 # se estiver usando windows, o gerenciador de dispositivos informa a porta
 
 
-serialName = "COM4"                  # Windows(variacao de)
+serialName = "COM3"                  # Windows(variacao de)
 
 def datagrama(tipo, num_ultimo_pacote):
     ceop = b'\xAA\xBB\xAA\xBB'
@@ -70,7 +70,6 @@ def main():
         
         print("esperando o primeiro byte de sacrifício")
         rxBuffer, nRx = com1.getData(1)
-        print("oi")
         com1.rx.clearBuffer()
         time.sleep(.1)
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
@@ -95,6 +94,7 @@ def main():
             cont = 1
             tempo_duracao=0
             timeout=10
+            tempo_inicial = time.time()
             while cont <= total_pacotes:# and tempo_duracao< timeout:
                 print(cont,total_pacotes)
                 print("entrou no while")
@@ -106,16 +106,12 @@ def main():
                         print(tempo_duracao)
                         escrever_log(f"Time out.", "log_server.txt")
                         print("Time out!")
+                        break
                         com1.disable()
 
                 head, _ = com1.getData(10)    
-                print('1')
                 payload,_ = com1.getData(head[3])
-                print('2')
                 ceop,_ = com1.getData(4)
-                print('3')
-                print("head2",head[0],head[1])
-                print(conteudo_img)
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
@@ -141,18 +137,16 @@ def main():
                             conteudo_img = bytearray()
                             imagem = 2
                             cont = total_pacotes +1
-                            print("bla")
                             head, _ = com1.getData(10)
-                            print("bla1",head)
                             ceop, _ = com1.getData(4)
-                            print("bla2",ceop)
                         else:
                             com1.sendData(datagrama(4,cont))
-                if tempo_fim - tempo_inicial > timeout:
+                if time.time() - tempo_inicial > timeout:
                     escrever_log(f"Time out.", "log_server.txt")
+                    print("Tempo de envio: ", tempo_duracao)
                     com1.sendData(datagrama(5, 0))
                     com1.disable()
-                    print("Tempo de envio: ", tempo_duracao)
+                    break
 
  
 
