@@ -90,20 +90,22 @@ def main():
             h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
             ceop,_ =com1.getData(4) #pega o ceop
             if h[0] == 2:
-                timeout = 10
-                tempo_fim = time.time()
-                tempo_inicial = time.time()
-                tempo_duracao = 0
-                tempo_duracao = tempo_fim - tempo_inicial
                 escrever_log(f"Tem-se início o envio do arquivo de extensâo {numero_img}", "log_cliente.txt")
                 com1.sendData(datagrama(3,1,divide_pacotes(img)[1],divide_pacotes(img)[0][0], numero_img)) #envia o primeiro pacote
                 escrever_log("Pacote 1 enviado.", "log_cliente.txt")
                 print("Pacote 1 enviado.")
+                timeout = 10
+                tempo_inicial = time.time()
                 i = 2
-                while i <= (divide_pacotes(img)[1]) and tempo_duracao < timeout:
+                while i <= (divide_pacotes(img)[1]):
+                    print ("teste", i)
+                    while com1.rx.getBufferLen() < 14  and (time.time()-tempo_inicial) < timeout:
+                        print("Esperando resposta do server")
+
                     head,_ = com1.getData(10) #pega o head
-                    print("head que server mandou pro cliente: ", head)
                     ceop,_ =com1.getData(4) #pega o ceop
+                    print("head que server mandou pro client: ", head)
+
                     if head[0] == 5:
                         escrever_log("Time out.", "log_cliente.txt")
                         com1.disable()
@@ -111,38 +113,29 @@ def main():
                     elif head[0] == 6:
                         escrever_log(f"Número do pacote esperado incorreto. Enviando novamente o pacote requisitado", "log_cliente.txt")
                         com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]-1], numero_img))
-                        head,_ = com1.getData(10)
-                        ceop,_ =com1.getData(4)
-                        while head[0] == 6:
-                            com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]-1], numero_img))
-                            head,_ = com1.getData(10)
-                            ceop,_ =com1.getData(4)
 
                     elif head[0] == 7:
                         escrever_log(f"Erro na transmissao do pacote {head[1]}. Reenviá-lo.", "log_cliente.txt")
                         com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]], numero_img))
-                        head,_ = com1.getData(10)
-                        ceop,_ =com1.getData(4)
-                        while head[0] == 7:
-                            com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]], numero_img))
-                            head,_ = com1.getData(10)
-                            ceop,_ =com1.getData(4)
+
                     elif head[0] == 4:
                         com1.sendData(datagrama(3, i, divide_pacotes(img)[1], divide_pacotes(img)[0][i-1], numero_img)) #envia o proximo pacote
                         print("Pacote ", i)
                         escrever_log(f"Pacote {i} enviado.", "log_cliente.txt")
                         i += 1
+                        
                 if (i-1) == divide_pacotes(img)[1]:
+                    print("teste")
                     com1.getData(10)
                     com1.getData(4)
                     print(f"ultimo head mandado pelo server: ", head)
                     escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")   
                     numero_img += 1
-                if tempo_fim - tempo_inicial > timeout:
+                if time.time() - tempo_inicial > timeout:
                     escrever_log("Time out.", "log_cliente.txt")
                     com1.sendData(datagrama(5, 0, 0, 0, 0))
                     com1.disable()
-                com1.rx.getBufferLen()
+                tempo_inicial = time.time()
 
 
         envia_img(1, txBuffer1)

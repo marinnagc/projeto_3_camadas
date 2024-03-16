@@ -1,62 +1,154 @@
-[2024-03-15 17:08:24] Convite enviado para o servidor.
-[2024-03-15 17:09:34] Convite enviado para o servidor.
-[2024-03-15 17:09:35] Tem-se início o envio do arquivo de extensâo 1
-[2024-03-15 17:09:35] Pacote 1 enviado.
-[2024-03-15 17:09:35] Pacote 2 enviado.
-[2024-03-15 17:09:36] Pacote 3 enviado.
-[2024-03-15 17:09:36] Pacote 4 enviado.
-[2024-03-15 17:09:36] Pacote 5 enviado.
-[2024-03-15 17:09:37] Pacote 6 enviado.
-[2024-03-15 17:09:37] Pacote 7 enviado.
-[2024-03-15 17:09:37] Envio do arquivo de extensão 1 finalizado.
-[2024-03-15 17:09:37] Convite enviado para o servidor.
-[2024-03-15 17:09:38] Tem-se início o envio do arquivo de extensâo 2
-[2024-03-15 17:09:38] Pacote 1 enviado.
-[2024-03-15 17:09:38] Pacote 2 enviado.
-[2024-03-15 17:09:38] Pacote 3 enviado.
-[2024-03-15 17:09:39] Pacote 4 enviado.
-[2024-03-15 17:09:39] Pacote 5 enviado.
-[2024-03-15 17:09:39] Pacote 6 enviado.
-[2024-03-15 17:09:40] Pacote 7 enviado.
-[2024-03-15 17:09:40] Envio do arquivo de extensão 2 finalizado.
-[2024-03-15 17:11:40] Convite enviado para o servidor.
-[2024-03-15 17:11:40] Tem-se início o envio do arquivo de extensâo 1
-[2024-03-15 17:11:40] Pacote 1 enviado.
-[2024-03-15 17:11:40] Pacote 2 enviado.
-[2024-03-15 17:11:41] Pacote 3 enviado.
-[2024-03-15 17:11:41] Pacote 4 enviado.
-[2024-03-15 17:11:41] Pacote 5 enviado.
-[2024-03-15 17:11:42] Pacote 6 enviado.
-[2024-03-15 17:11:42] Pacote 7 enviado.
-[2024-03-15 17:11:42] Envio do arquivo de extensão 1 finalizado.
-[2024-03-15 17:11:42] Convite enviado para o servidor.
-[2024-03-15 17:11:43] Tem-se início o envio do arquivo de extensâo 2
-[2024-03-15 17:11:43] Pacote 1 enviado.
-[2024-03-15 17:11:43] Pacote 2 enviado.
-[2024-03-15 17:11:44] Pacote 3 enviado.
-[2024-03-15 17:11:44] Pacote 4 enviado.
-[2024-03-15 17:11:44] Pacote 5 enviado.
-[2024-03-15 17:11:45] Pacote 6 enviado.
-[2024-03-15 17:11:45] Pacote 7 enviado.
-[2024-03-15 17:11:46] Envio do arquivo de extensão 2 finalizado.
-[2024-03-15 17:13:08] Convite enviado para o servidor.
-[2024-03-15 17:13:19] Convite enviado para o servidor.
-[2024-03-15 17:13:20] Tem-se início o envio do arquivo de extensâo 1
-[2024-03-15 17:13:20] Pacote 1 enviado.
-[2024-03-15 17:13:20] Pacote 2 enviado.
-[2024-03-15 17:13:20] Pacote 3 enviado.
-[2024-03-15 17:13:21] Pacote 4 enviado.
-[2024-03-15 17:13:21] Pacote 5 enviado.
-[2024-03-15 17:13:21] Pacote 6 enviado.
-[2024-03-15 17:13:22] Pacote 7 enviado.
-[2024-03-15 17:13:22] Envio do arquivo de extensão 1 finalizado.
-[2024-03-15 17:13:22] Convite enviado para o servidor.
-[2024-03-15 17:13:22] Tem-se início o envio do arquivo de extensâo 2
-[2024-03-15 17:13:22] Pacote 1 enviado.
-[2024-03-15 17:13:23] Pacote 2 enviado.
-[2024-03-15 17:13:23] Pacote 3 enviado.
-[2024-03-15 17:13:23] Pacote 4 enviado.
-[2024-03-15 17:13:24] Pacote 5 enviado.
-[2024-03-15 17:13:24] Pacote 6 enviado.
-[2024-03-15 17:13:24] Pacote 7 enviado.
-[2024-03-15 17:13:25] Envio do arquivo de extensão 2 finalizado.
+[2024-03-15 17:44:48] Convite enviado para o servidor.
+[2024-03-15 17:44:48] Convite enviado para o servidor.
+[2024-03-15 17:46:43] Convite enviado para o servidor.
+[2024-03-15 17:46:43] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:46:43] Pacote 1 enviado.
+[2024-03-15 17:46:44] Pacote 2 enviado.
+[2024-03-15 17:46:44] Pacote 3 enviado.
+[2024-03-15 17:46:45] Pacote 4 enviado.
+[2024-03-15 17:46:45] Pacote 5 enviado.
+[2024-03-15 17:46:46] Pacote 6 enviado.
+[2024-03-15 17:46:46] Pacote 7 enviado.
+[2024-03-15 17:46:46] Envio do arquivo de extensão 1 finalizado.
+[2024-03-15 17:46:46] Convite enviado para o servidor.
+[2024-03-15 17:46:47] Tem-se início o envio do arquivo de extensâo 2
+[2024-03-15 17:46:47] Pacote 1 enviado.
+[2024-03-15 17:46:47] Pacote 2 enviado.
+[2024-03-15 17:46:47] Pacote 3 enviado.
+[2024-03-15 17:46:48] Pacote 4 enviado.
+[2024-03-15 17:46:48] Pacote 5 enviado.
+[2024-03-15 17:46:48] Pacote 6 enviado.
+[2024-03-15 17:46:49] Pacote 7 enviado.
+[2024-03-15 17:46:49] Envio do arquivo de extensão 2 finalizado.
+[2024-03-15 17:48:58] Convite enviado para o servidor.
+[2024-03-15 17:48:58] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:48:58] Pacote 1 enviado.
+[2024-03-15 17:48:59] Pacote 2 enviado.
+[2024-03-15 17:48:59] Pacote 3 enviado.
+[2024-03-15 17:48:59] Pacote 4 enviado.
+[2024-03-15 17:49:00] Pacote 5 enviado.
+[2024-03-15 17:49:00] Pacote 6 enviado.
+[2024-03-15 17:49:00] Pacote 7 enviado.
+[2024-03-15 17:49:01] Envio do arquivo de extensão 1 finalizado.
+[2024-03-15 17:49:01] Convite enviado para o servidor.
+[2024-03-15 17:49:01] Tem-se início o envio do arquivo de extensâo 2
+[2024-03-15 17:49:01] Pacote 1 enviado.
+[2024-03-15 17:49:02] Pacote 2 enviado.
+[2024-03-15 17:49:02] Pacote 3 enviado.
+[2024-03-15 17:49:02] Pacote 4 enviado.
+[2024-03-15 17:49:03] Pacote 5 enviado.
+[2024-03-15 17:49:03] Pacote 6 enviado.
+[2024-03-15 17:49:03] Pacote 7 enviado.
+[2024-03-15 17:49:04] Envio do arquivo de extensão 2 finalizado.
+[2024-03-15 17:49:34] Convite enviado para o servidor.
+[2024-03-15 17:49:34] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:49:34] Pacote 1 enviado.
+[2024-03-15 17:49:34] Pacote 2 enviado.
+[2024-03-15 17:49:35] Pacote 3 enviado.
+[2024-03-15 17:49:35] Pacote 4 enviado.
+[2024-03-15 17:49:35] Pacote 5 enviado.
+[2024-03-15 17:52:02] Convite enviado para o servidor.
+[2024-03-15 17:52:02] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:52:02] Pacote 1 enviado.
+[2024-03-15 17:52:02] Pacote 2 enviado.
+[2024-03-15 17:52:03] Pacote 3 enviado.
+[2024-03-15 17:52:03] Pacote 4 enviado.
+[2024-03-15 17:52:03] Pacote 5 enviado.
+[2024-03-15 17:52:04] Pacote 6 enviado.
+[2024-03-15 17:53:14] Convite enviado para o servidor.
+[2024-03-15 17:53:14] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:53:14] Pacote 1 enviado.
+[2024-03-15 17:53:15] Pacote 2 enviado.
+[2024-03-15 17:53:15] Pacote 3 enviado.
+[2024-03-15 17:53:16] Pacote 4 enviado.
+[2024-03-15 17:53:16] Pacote 5 enviado.
+[2024-03-15 17:58:22] Convite enviado para o servidor.
+[2024-03-15 17:58:23] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:58:23] Pacote 1 enviado.
+[2024-03-15 17:58:23] Pacote 2 enviado.
+[2024-03-15 17:58:23] Pacote 3 enviado.
+[2024-03-15 17:58:24] Pacote 4 enviado.
+[2024-03-15 17:58:24] Pacote 5 enviado.
+[2024-03-15 17:58:24] Pacote 6 enviado.
+[2024-03-15 17:58:25] Pacote 7 enviado.
+[2024-03-15 17:58:25] Envio do arquivo de extensão 1 finalizado.
+[2024-03-15 17:58:25] Convite enviado para o servidor.
+[2024-03-15 17:58:26] Tem-se início o envio do arquivo de extensâo 2
+[2024-03-15 17:58:26] Pacote 1 enviado.
+[2024-03-15 17:58:26] Pacote 2 enviado.
+[2024-03-15 17:58:26] Pacote 3 enviado.
+[2024-03-15 17:58:27] Pacote 4 enviado.
+[2024-03-15 17:58:27] Pacote 5 enviado.
+[2024-03-15 17:58:27] Pacote 6 enviado.
+[2024-03-15 17:58:28] Pacote 7 enviado.
+[2024-03-15 17:58:28] Envio do arquivo de extensão 2 finalizado.
+[2024-03-15 17:58:45] Convite enviado para o servidor.
+[2024-03-15 17:58:45] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:58:45] Pacote 1 enviado.
+[2024-03-15 17:58:45] Pacote 2 enviado.
+[2024-03-15 17:58:46] Pacote 3 enviado.
+[2024-03-15 17:58:46] Pacote 4 enviado.
+[2024-03-15 17:58:46] Pacote 5 enviado.
+[2024-03-15 17:59:15] Convite enviado para o servidor.
+[2024-03-15 17:59:15] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:59:15] Pacote 1 enviado.
+[2024-03-15 17:59:16] Pacote 2 enviado.
+[2024-03-15 17:59:16] Pacote 3 enviado.
+[2024-03-15 17:59:16] Pacote 4 enviado.
+[2024-03-15 17:59:17] Pacote 5 enviado.
+[2024-03-15 17:59:17] Pacote 6 enviado.
+[2024-03-15 17:59:17] Pacote 7 enviado.
+[2024-03-15 17:59:18] Envio do arquivo de extensão 1 finalizado.
+[2024-03-15 17:59:18] Convite enviado para o servidor.
+[2024-03-15 17:59:18] Tem-se início o envio do arquivo de extensâo 2
+[2024-03-15 17:59:18] Pacote 1 enviado.
+[2024-03-15 17:59:19] Pacote 2 enviado.
+[2024-03-15 17:59:19] Pacote 3 enviado.
+[2024-03-15 17:59:19] Pacote 4 enviado.
+[2024-03-15 17:59:20] Pacote 5 enviado.
+[2024-03-15 17:59:20] Pacote 6 enviado.
+[2024-03-15 17:59:20] Pacote 7 enviado.
+[2024-03-15 17:59:21] Envio do arquivo de extensão 2 finalizado.
+[2024-03-15 17:59:58] Convite enviado para o servidor.
+[2024-03-15 17:59:59] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 17:59:59] Pacote 1 enviado.
+[2024-03-15 17:59:59] Pacote 2 enviado.
+[2024-03-15 17:59:59] Pacote 3 enviado.
+[2024-03-15 18:01:25] Convite enviado para o servidor.
+[2024-03-15 18:01:25] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 18:01:25] Pacote 1 enviado.
+[2024-03-15 18:01:25] Pacote 2 enviado.
+[2024-03-15 18:01:26] Pacote 3 enviado.
+[2024-03-15 18:01:26] Pacote 4 enviado.
+[2024-03-15 18:01:27] Pacote 5 enviado.
+[2024-03-15 18:01:27] Pacote 6 enviado.
+[2024-03-15 18:01:27] Pacote 7 enviado.
+[2024-03-15 18:01:28] Envio do arquivo de extensão 1 finalizado.
+[2024-03-15 18:01:28] Convite enviado para o servidor.
+[2024-03-15 18:01:28] Tem-se início o envio do arquivo de extensâo 2
+[2024-03-15 18:01:28] Pacote 1 enviado.
+[2024-03-15 18:01:29] Pacote 2 enviado.
+[2024-03-15 18:01:29] Pacote 3 enviado.
+[2024-03-15 18:01:29] Pacote 4 enviado.
+[2024-03-15 18:01:30] Pacote 5 enviado.
+[2024-03-15 18:01:30] Pacote 6 enviado.
+[2024-03-15 18:10:06] Convite enviado para o servidor.
+[2024-03-15 18:10:06] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-15 18:10:06] Pacote 1 enviado.
+[2024-03-15 18:10:06] Pacote 2 enviado.
+[2024-03-15 18:10:07] Pacote 3 enviado.
+[2024-03-15 18:10:07] Pacote 4 enviado.
+[2024-03-15 18:10:07] Pacote 5 enviado.
+[2024-03-15 18:10:08] Pacote 6 enviado.
+[2024-03-15 18:10:08] Pacote 7 enviado.
+[2024-03-15 18:10:09] Envio do arquivo de extensão 1 finalizado.
+[2024-03-15 18:10:09] Convite enviado para o servidor.
+[2024-03-15 18:10:09] Tem-se início o envio do arquivo de extensâo 2
+[2024-03-15 18:10:09] Pacote 1 enviado.
+[2024-03-15 18:10:09] Pacote 2 enviado.
+[2024-03-15 18:10:10] Pacote 3 enviado.
+[2024-03-15 18:10:10] Pacote 4 enviado.
+[2024-03-15 18:10:10] Pacote 5 enviado.
+[2024-03-15 18:10:11] Pacote 6 enviado.
+[2024-03-15 18:10:11] Pacote 7 enviado.
+[2024-03-15 18:10:11] Envio do arquivo de extensão 2 finalizado.
