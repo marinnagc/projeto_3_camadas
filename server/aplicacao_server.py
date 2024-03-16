@@ -86,13 +86,11 @@ def main():
             print("entrou")
             if head[0] == 1 and head[1] == 255:
                 total_pacotes = head[2]
+                
                 #imagem = head[3]
                 com1.sendData(datagrama(2, 0)) 
-                print("tipo2")# aceita o convite
+                print("tipo2")  # aceita o convite
             escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
-            print('sla')
-            #h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite 
-            #com1.rx.clearBuffer()
 
             cont = 1
             tempo_duracao=0
@@ -101,6 +99,15 @@ def main():
                 print(cont,total_pacotes)
                 print("entrou no while")
                 print("head",head[0],head[1])
+                while com1.rx.getBufferLen() == 0:
+                    time.sleep(0.02)
+                    tempo_duracao = time.time() - tempo_inicial
+                    if tempo_duracao >= 10:
+                        print(tempo_duracao)
+                        escrever_log(f"Time out.", "log_server.txt")
+                        print("Time out!")
+                        com1.disable()
+
                 head, _ = com1.getData(10)    
                 print('1')
                 payload,_ = com1.getData(head[3])
@@ -108,24 +115,12 @@ def main():
                 ceop,_ = com1.getData(4)
                 print('3')
                 print("head2",head[0],head[1])
-                tempo_fim = 0
-                tempo_fim = time.time()
-                tempo_inicial = 0
-                tempo_inicial = time.time()
-                tempo_duracao = 0
-                tempo_duracao = tempo_fim - tempo_inicial
-                timeout = 10
-                #print("payload",payload)
-                #print("ceop",ceop)
-                
                 print(conteudo_img)
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
                 elif head[0] == 3:
-                    tempo_fim = 0
                     tempo_fim = time.time()
-                    tempo_duracao = 0
                     tempo_duracao = tempo_fim - tempo_inicial
                     if ceop != b'\xAA\xBB\xAA\xBB':
                         com1.sendData(datagrama(7,head[1]))
