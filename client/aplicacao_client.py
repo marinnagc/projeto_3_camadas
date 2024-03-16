@@ -96,11 +96,19 @@ def main():
                 print("Pacote 1 enviado.")
                 timeout = 10
                 tempo_inicial = time.time()
+                tempo_duracao = 0
                 i = 2
                 while i <= (divide_pacotes(img)[1]):
                     print ("teste", i)
-                    while com1.rx.getBufferLen() < 14  and (time.time()-tempo_inicial) < timeout:
-                        print("Esperando resposta do server")
+                    while com1.rx.getBufferLen() == 0:
+                        time.sleep(0.02)
+                        tempo_duracao = time.time() - tempo_inicial
+                        if tempo_duracao >= timeout:
+                            print(tempo_duracao)
+                            escrever_log("Time out.", "log_cliente.txt")
+                            print("Time out")
+                            break
+                            com1.disable()
 
                     head,_ = com1.getData(10) #pega o head
                     ceop,_ =com1.getData(4) #pega o ceop
@@ -119,23 +127,26 @@ def main():
                         com1.sendData(datagrama(3, head[1], divide_pacotes(img)[1], divide_pacotes(img)[0][head[1]], numero_img))
 
                     elif head[0] == 4:
-                        com1.sendData(datagrama(3, i, divide_pacotes(img)[1], divide_pacotes(img)[0][i-1], numero_img)) #envia o proximo pacote
-                        print("Pacote ", i)
-                        escrever_log(f"Pacote {i} enviado.", "log_cliente.txt")
-                        i += 1
-                        
-                if (i-1) == divide_pacotes(img)[1]:
-                    print("teste")
-                    com1.getData(10)
-                    com1.getData(4)
-                    print(f"ultimo head mandado pelo server: ", head)
-                    escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")   
-                    numero_img += 1
+                        tempo_inicial = 0
+                        tempo_inicial = time.time()
+                        if (i-1) == divide_pacotes(img)[1]:
+                            print("teste")
+                            com1.getData(10)
+                            com1.getData(4)
+                            print(f"ultimo head mandado pelo server: ", head)
+                            escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")   
+                            numero_img += 1
+                        else:
+                            com1.sendData(datagrama(3, i, divide_pacotes(img)[1], divide_pacotes(img)[0][i-1], numero_img)) #envia o proximo pacote
+                            print("Pacote ", i)
+                            escrever_log(f"Pacote {i} enviado.", "log_cliente.txt")
+                            i += 1
+
                 if time.time() - tempo_inicial > timeout:
                     escrever_log("Time out.", "log_cliente.txt")
                     com1.sendData(datagrama(5, 0, 0, 0, 0))
                     com1.disable()
-                tempo_inicial = time.time()
+                    print("Tempo de envio dos arquivos: ", time.time() - tempo_inicial)
 
 
         envia_img(1, txBuffer1)

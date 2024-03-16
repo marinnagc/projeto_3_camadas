@@ -152,3 +152,118 @@
 [2024-03-15 18:10:11] Pacote 6 enviado.
 [2024-03-15 18:10:11] Pacote 7 enviado.
 [2024-03-15 18:10:11] Envio do arquivo de extensão 2 finalizado.
+[2024-03-16 17:20:14] Convite enviado para o servidor.
+[2024-03-16 17:21:22] Convite enviado para o servidor.
+[2024-03-16 17:22:24] Convite enviado para o servidor.
+[2024-03-16 17:22:24] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:22:24] Pacote 1 enviado.
+[2024-03-16 17:26:46] Convite enviado para o servidor.
+[2024-03-16 17:26:46] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:26:46] Pacote 1 enviado.
+[2024-03-16 17:28:00] Convite enviado para o servidor.
+[2024-03-16 17:28:01] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:28:01] Pacote 1 enviado.
+[2024-03-16 17:28:01] Pacote 2 enviado.
+[2024-03-16 17:28:01] Pacote 3 enviado.
+[2024-03-16 17:28:01] Pacote 4 enviado.
+[2024-03-16 17:28:02] Pacote 5 enviado.
+[2024-03-16 17:28:02] Pacote 6 enviado.
+[2024-03-16 17:28:02] Pacote 7 enviado.
+[2024-03-16 17:28:03] Envio do arquivo de extensão 1 finalizado.
+[2024-03-16 17:28:03] Convite enviado para o servidor.
+[2024-03-16 17:35:04] Convite enviado para o servidor.
+[2024-03-16 17:35:05] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:35:05] Pacote 1 enviado.
+[2024-03-16 17:35:05] Pacote 3 enviado.
+[2024-03-16 17:35:05] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:06] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:06] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:07] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:07] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:07] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:08] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:08] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:08] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:09] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:09] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:10] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:35:10] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:38] Convite enviado para o servidor.
+[2024-03-16 17:36:39] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:36:39] Pacote 1 enviado.
+[2024-03-16 17:36:39] Pacote 3 enviado.
+[2024-03-16 17:36:39] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:40] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:40] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:40] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:41] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:41] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:41] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:36:42] Número do pacote esperado incorreto. Enviando novamente o pacote requisitado
+[2024-03-16 17:37:33] Convite enviado para o servidor.
+[2024-03-16 17:37:34] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:37:34] Pacote 1 enviado.
+[2024-03-16 17:37:34] Pacote 2 enviado.
+[2024-03-16 17:37:34] Pacote 3 enviado.
+[2024-03-16 17:37:35] Pacote 4 enviado.
+[2024-03-16 17:37:35] Pacote 5 enviado.
+[2024-03-16 17:37:35] Pacote 6 enviado.
+[2024-03-16 17:37:36] Pacote 7 enviado.
+[2024-03-16 17:37:36] Convite enviado para o servidor.
+[2024-03-16 17:39:02] Convite enviado para o servidor.
+[2024-03-16 17:39:02] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:39:02] Pacote 1 enviado.
+[2024-03-16 17:39:03] Pacote 2 enviado.
+[2024-03-16 17:39:13] Time out.
+[2024-03-16 17:39:14] Time out.
+[2024-03-16 17:39:15] Time out.
+[2024-03-16 17:39:16] Time out.
+[2024-03-16 17:39:17] Time out.
+[2024-03-16 17:39:18] Time out.
+[2024-03-16 17:39:19] Time out.
+[2024-03-16 17:39:20] Time out.
+[2024-03-16 17:39:21] Time out.
+[2024-03-16 17:39:22] Time out.
+[2024-03-16 17:39:23] Time out.
+[2024-03-16 17:39:24] Time out.
+[2024-03-16 17:39:25] Time out.
+[2024-03-16 17:39:26] Time out.
+[2024-03-16 17:39:27] Time out.
+[2024-03-16 17:39:28] Time out.
+[2024-03-16 17:39:29] Time out.
+[2024-03-16 17:39:30] Time out.
+[2024-03-16 17:39:31] Time out.
+[2024-03-16 17:39:32] Time out.
+[2024-03-16 17:39:33] Time out.
+[2024-03-16 17:39:34] Time out.
+[2024-03-16 17:39:35] Time out.
+[2024-03-16 17:39:36] Time out.
+[2024-03-16 17:39:37] Time out.
+[2024-03-16 17:39:38] Time out.
+[2024-03-16 17:39:40] Time out.
+[2024-03-16 17:39:41] Time out.
+[2024-03-16 17:39:42] Time out.
+[2024-03-16 17:39:43] Time out.
+[2024-03-16 17:39:44] Time out.
+[2024-03-16 17:40:53] Convite enviado para o servidor.
+[2024-03-16 17:40:53] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:40:53] Pacote 1 enviado.
+[2024-03-16 17:41:03] Time out.
+[2024-03-16 17:41:04] Time out.
+[2024-03-16 17:41:05] Time out.
+[2024-03-16 17:41:06] Time out.
+[2024-03-16 17:41:07] Time out.
+[2024-03-16 17:41:08] Time out.
+[2024-03-16 17:41:09] Time out.
+[2024-03-16 17:41:10] Time out.
+[2024-03-16 17:41:11] Time out.
+[2024-03-16 17:41:12] Time out.
+[2024-03-16 17:42:00] Convite enviado para o servidor.
+[2024-03-16 17:42:01] Tem-se início o envio do arquivo de extensâo 1
+[2024-03-16 17:42:01] Pacote 1 enviado.
+[2024-03-16 17:42:01] Pacote 2 enviado.
+[2024-03-16 17:42:01] Pacote 3 enviado.
+[2024-03-16 17:42:02] Pacote 4 enviado.
+[2024-03-16 17:42:02] Pacote 5 enviado.
+[2024-03-16 17:42:02] Pacote 6 enviado.
+[2024-03-16 17:42:12] Time out.
