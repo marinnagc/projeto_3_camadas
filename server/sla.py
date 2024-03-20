@@ -70,7 +70,6 @@ def main():
         
         print("esperando o primeiro byte de sacrifício")
         rxBuffer, nRx = com1.getData(1)
-        print("oi")
         com1.rx.clearBuffer()
         time.sleep(.1)
         #Se chegamos até aqui, a comunicação foi aberta com sucesso. Faça um print para informar.
@@ -84,17 +83,14 @@ def main():
 
         while imagem<=2:
             print("entrou")
-
             if head[0] == 1 and head[1] == 255:
                 total_pacotes = head[2]
-                
                 #imagem = head[3]
                 com1.sendData(datagrama(2, 0)) 
                 print("tipo2")  # aceita o convite
             escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
-            #print(cont)
+
             cont = 1
-            print(cont)
             tempo_duracao=0
             timeout=10
             tempo_inicial = time.time()
@@ -108,54 +104,47 @@ def main():
                     if tempo_duracao >= 10:
                         print(tempo_duracao)
                         escrever_log(f"Time out.", "log_server.txt")
-                        print("Time out!")   #
+                        print("Time out!")
+                        break
                         com1.disable()
 
                 head, _ = com1.getData(10)    
-                print(head,'1')
                 payload,_ = com1.getData(head[3])
-                print(payload,'2')
                 ceop,_ = com1.getData(4)
-                print('3')
-                print("head2",head[0],head[1])
-                #print(conteudo_img)
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
                 elif head[0] == 3:
-                    tempo_fim = time.time()
-                    tempo_duracao = tempo_fim - tempo_inicial
+                    #tempo_duracao = time.time() - tempo_inicial
                     if ceop != b'\xAA\xBB\xAA\xBB':
                         com1.sendData(datagrama(7,head[1]))
                     elif head[1] != cont:
                         com1.sendData(datagrama(6,cont))
                         print("tipo 6")
                     elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB':
-                        tempo_inicial = 0
-                        tempo_inicial = time.time()
                         print('tipo 4')
                         cont+=1
                         conteudo_img += payload
                         if head[1] == total_pacotes:
                             print(head)
-                            com1.sendData(datagrama(4,cont))
+                            #com1.sendData(datagrama(4,cont))
                             salva_img(imagem,conteudo_img)
                             escrever_log(f"Recebeu o arquivo de extensâo {imagem}", "log_server.txt")
                             conteudo_img = bytearray()
                             imagem = 2
                             cont = total_pacotes +1
-                            print("bla")
                             head, _ = com1.getData(10)
-                            print("bla1",head)
                             ceop, _ = com1.getData(4)
-                            print("bla2",ceop) 
+                            #com1.sendData(datagrama(2,0))
                         else:
                             com1.sendData(datagrama(4,cont))
-                if tempo_fim - tempo_inicial > timeout:
+                            tempo_inicial = time.time()
+                if time.time() - tempo_inicial > timeout:
                     escrever_log(f"Time out.", "log_server.txt")
+                    print("Tempo de envio: ", tempo_duracao)
                     com1.sendData(datagrama(5, 0))
                     com1.disable()
-                    print("Tempo de envio: ", tempo_duracao)
+                    break
 
  
 
@@ -185,4 +174,5 @@ if __name__ == "__main__":
 # #Dois arquivos de log deve ser gerado durante a transmissão de cada arquivo. Um no client e outro no
 # server. No arquivo deverá haver o registro de todas as intercorrências: pacote enviado com problema,
 # time out. Deve haver também o horário e extensão do arquivo enviado no lado client e do recebido no
-# lado server. Para o envio de 2 arquivos, um total de 4 arquivos serão gerados. Dois em cada computador CHECK
+# lado server. Para o envio de 2 arquivos, um total de 4 arquivos serão gerados. Dois em cada computador CHECK
+    
