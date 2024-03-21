@@ -57,6 +57,21 @@ def escrever_log(mensagem, nome_arquivo="log.txt"):
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(nome_arquivo, "a") as arquivo_log:
         arquivo_log.write(f"[{timestamp}] {mensagem}\n")
+
+def crc16(data):
+    crc = 0x0000
+    poly = 0x1021
+
+    for byte in data:
+        crc ^= (byte << 8)
+        for _ in range(8):
+            if crc & 0x8000:
+                crc = (crc << 1) ^ poly
+            else:
+                crc <<= 1
+            crc &= 0xFFFF
+
+    return crc
         
 def main():
     try:
@@ -109,7 +124,9 @@ def main():
                         print(tempo_duracao)
                         escrever_log(f"Time out.", "log_server.txt")
                         print("Time out!")   #
+                        com1.sendData(datagrama(5,0))
                         com1.disable()
+                        break
 
                 head, _ = com1.getData(10)    
                 print(head,'1')
@@ -117,7 +134,7 @@ def main():
                 print(payload,'2')
                 ceop,_ = com1.getData(4)
                 print('3')
-                print("head2",head[0],head[1])
+                #print("head2",head[0],head[1])
                 #print(conteudo_img)
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
@@ -127,6 +144,7 @@ def main():
                     tempo_duracao = tempo_fim - tempo_inicial
                     if ceop != b'\xAA\xBB\xAA\xBB':
                         com1.sendData(datagrama(7,head[1]))
+                        com1.rx.clearBuffer()
                     elif head[1] != cont:
                         com1.sendData(datagrama(6,cont))
                         print("tipo 6")
@@ -138,24 +156,29 @@ def main():
                         conteudo_img += payload
                         if head[1] == total_pacotes:
                             print(head)
-                            com1.sendData(datagrama(4,cont))
+                            com1.sendData(datagrama(4,cont-1))
                             salva_img(imagem,conteudo_img)
                             escrever_log(f"Recebeu o arquivo de extensâo {imagem}", "log_server.txt")
                             conteudo_img = bytearray()
-                            imagem = 2
-                            cont = total_pacotes +1
-                            print("bla")
-                            head, _ = com1.getData(10)
-                            print("bla1",head)
-                            ceop, _ = com1.getData(4)
-                            print("bla2",ceop) 
+                            imagem +=1
+                            if imagem == 3:
+                                break
+                            else:
+                                cont = total_pacotes +1
+                                print("bla")
+                                head, _ = com1.getData(10)
+                                print("bla1",head)
+                                ceop, _ = com1.getData(4)
+                                print("bla2",ceop) 
+                             
+                            
                         else:
                             com1.sendData(datagrama(4,cont))
-                if tempo_fim - tempo_inicial > timeout:
+                '''if tempo_fim - tempo_inicial > timeout:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.sendData(datagrama(5, 0))
                     com1.disable()
-                    print("Tempo de envio: ", tempo_duracao)
+                    print("Tempo de envio: ", tempo_duracao)'''
 
  
 
