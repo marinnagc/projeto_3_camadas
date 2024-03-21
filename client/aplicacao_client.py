@@ -105,7 +105,7 @@ def main():
                         time.sleep(0.02)
                         tempo_duracao = time.time() - tempo_inicial
                         if tempo_duracao >= 1:
-                            print(tempo_duracao)
+                            # print(tempo_duracao)
                             com1.sendData(datagrama(3, i-1, divide_pacotes(txBuffer1)[1], divide_pacotes(txBuffer1)[0][i-2], numero_img)) #envia o proximo pacote
                     head,_ = com1.getData(10) #pega o head
                     ceop,_ =com1.getData(4) #pega o ceop
@@ -113,6 +113,7 @@ def main():
 
                     if head[0] == 5:
                         escrever_log("Time out.", "log_cliente.txt")
+                        print("Time out")
                         com1.disable()
                         break
                     elif head[0] == 6:
@@ -143,9 +144,10 @@ def main():
 
                 if time.time() - tempo_inicial > timeout:
                     escrever_log("Time out.", "log_cliente.txt")
-                    com1.sendData(datagrama(5, 0, 0, 0, 0))
-                    com1.disable()
                     print("Tempo de envio dos arquivos: ", time.time() - tempo_inicial)
+                    com1.sendData(datagrama(5, 0, 0, 0, 0))
+                    break
+                    com1.disable()
 
 
         print("Razão entre os tamanhos dos arquivos: ", len(txBuffer1)/len(txBuffer2))  
