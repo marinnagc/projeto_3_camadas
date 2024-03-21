@@ -94,6 +94,13 @@ def main():
         head, _ = com1.getData(10) #recebe o convite do client
         print(head[0],head[1])
         ceop, _ = com1.getData(4) #recebe o convite do client
+        if head[0] == 1 and head[1] == 255:
+            total_pacotes = head[2]
+            
+            #imagem = head[3]
+            com1.sendData(datagrama(2, 0)) 
+            print("tipo2")  # aceita o convite
+            escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
         conteudo_img = bytearray()
         imagem = 1
 
@@ -101,13 +108,13 @@ def main():
             print("entrou")
 
 
-            if head[0] == 1 and head[1] == 255:
+            ''''if head[0] == 1 and head[1] == 255:
                 total_pacotes = head[2]
                 
                 #imagem = head[3]
                 com1.sendData(datagrama(2, 0)) 
                 print("tipo2")  # aceita o convite
-            escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")
+            escrever_log(f"Comunicação iniciada com o client.", "log_server.txt")'''
             #print(cont)
             cont = 1
             print(cont)
