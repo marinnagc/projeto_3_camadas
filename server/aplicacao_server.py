@@ -100,6 +100,7 @@ def main():
         while imagem<=2:
             print("entrou")
 
+
             if head[0] == 1 and head[1] == 255:
                 total_pacotes = head[2]
                 
@@ -127,27 +128,37 @@ def main():
                         com1.sendData(datagrama(5,0))
                         com1.disable()
                         break
+                    # else:
+                    #     com1.sendData(datagrama(4,cont-1))
+                    #     time.sleep(0.02)
 
                 head, _ = com1.getData(10)    
                 print(head,'1')
                 payload,_ = com1.getData(head[3])
                 print(payload,'2')
                 ceop,_ = com1.getData(4)
-                print('3')
+                print(ceop,'3')
+                com1.rx.clearBuffer()
                 #print("head2",head[0],head[1])
                 #print(conteudo_img)
+                '''if ceop != b'\xAA\xBB\xAA\xBB':
+                    com1.sendData(datagrama(7,head[1]))
+                    com1.rx.clearBuffer()'''
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
                 elif head[0] == 3:
+                    print("mensagem 3")
                     tempo_fim = time.time()
                     tempo_duracao = tempo_fim - tempo_inicial
                     if ceop != b'\xAA\xBB\xAA\xBB':
                         com1.sendData(datagrama(7,head[1]))
                         com1.rx.clearBuffer()
                     elif head[1] != cont:
-                        com1.sendData(datagrama(6,cont))
+                        com1.sendData(datagrama(6,cont-1))
+                        print(datagrama(6,cont-1),"k"*100)
                         print("tipo 6")
+                        com1.rx.clearBuffer()
                     elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB':
                         tempo_inicial = 0
                         tempo_inicial = time.time()
@@ -169,9 +180,7 @@ def main():
                                 head, _ = com1.getData(10)
                                 print("bla1",head)
                                 ceop, _ = com1.getData(4)
-                                print("bla2",ceop) 
-                             
-                            
+                                print("bla2",ceop)    
                         else:
                             com1.sendData(datagrama(4,cont))
                 '''if tempo_fim - tempo_inicial > timeout:
