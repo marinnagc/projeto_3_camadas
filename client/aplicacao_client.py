@@ -125,13 +125,15 @@ def main():
 
                     elif head[0] == 4:
                         if i == divide_pacotes(txBuffer1)[1]:
-                            print("teste")
+                            print("contador é igual ao numero de pacotes")
+                            com1.sendData(datagrama(3, i, divide_pacotes(txBuffer1)[1], divide_pacotes(txBuffer1)[0][i-1], numero_img)) #envia o proximo pacote
                             head,_ = com1.getData(10)
                             ceop,_ = com1.getData(4)
                             print(f"ultimo head mandado pelo server: ", head)
                             escrever_log(f"Envio do arquivo de extensão {numero_img} finalizado.", "log_cliente.txt")   
-                            numero_img = 2
+                            numero_img += 1
                             txBuffer1 = open(image2,"rb").read() #imagem em bytes
+                            i += 1 
                         else:
                             tempo_inicial = time.time()
                             com1.sendData(datagrama(3, i, divide_pacotes(txBuffer1)[1], divide_pacotes(txBuffer1)[0][i-1], numero_img)) #envia o proximo pacote
