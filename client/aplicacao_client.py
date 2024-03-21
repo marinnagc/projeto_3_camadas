@@ -106,6 +106,7 @@ def main():
                         tempo_duracao = time.time() - tempo_inicial
                         if tempo_duracao >= 1:
                             # print(tempo_duracao)
+                            time.sleep(2)
                             com1.sendData(datagrama(3, i-1, divide_pacotes(txBuffer1)[1], divide_pacotes(txBuffer1)[0][i-2], numero_img)) #envia o proximo pacote
                     head,_ = com1.getData(10) #pega o head
                     ceop,_ =com1.getData(4) #pega o ceop
