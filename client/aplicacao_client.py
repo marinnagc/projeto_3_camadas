@@ -84,13 +84,13 @@ def main():
         txBuffer2 = open(image2,"rb").read() #imagem em bytes!
         print("Imagem carregada")
         numero_img = 1
-        while numero_img<=2:
-            com1.sendData(datagrama(1, 0, divide_pacotes(txBuffer1)[1], 0, numero_img)) #envia o convite para o servidor (handshake)
-            escrever_log(f"Convite enviado para o servidor.", "log_cliente.txt")
-            h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
-            print(h)
-            ceop,_ =com1.getData(4) #pega o ceop
-            if h[0] == 2:
+        com1.sendData(datagrama(1, 0, divide_pacotes(txBuffer1)[1], 0, numero_img)) #envia o convite para o servidor (handshake)
+        escrever_log(f"Convite enviado para o servidor.", "log_cliente.txt")
+        h,_ = com1.getData(10) #pega o head do server pra ver se ele aceitou o convite
+        print(h)
+        ceop,_ =com1.getData(4) #pega o ceop
+        if h[0] == 2:
+            while numero_img<=2:
                 escrever_log(f"Tem-se início o envio do arquivo de extensâo {numero_img}", "log_cliente.txt")
                 com1.sendData(datagrama(3,1,divide_pacotes(txBuffer1)[1],divide_pacotes(txBuffer1)[0][0], numero_img)) #envia o primeiro pacote
                 tempo_inicial=time.time()
@@ -142,12 +142,12 @@ def main():
                             escrever_log(f"Pacote {i} enviado.", "log_cliente.txt")
                             i += 1
 
-                if time.time() - tempo_inicial > timeout:
+                ''''if time.time() - tempo_inicial > timeout:
                     escrever_log("Time out.", "log_cliente.txt")
                     print("Tempo de envio dos arquivos: ", time.time() - tempo_inicial)
                     com1.sendData(datagrama(5, 0, 0, 0, 0))
                     break
-                    com1.disable()
+                    com1.disable()'''
 
 
         print("Razão entre os tamanhos dos arquivos: ", len(txBuffer1)/len(txBuffer2))  
