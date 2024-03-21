@@ -146,7 +146,6 @@ def main():
                     print("Tempo de envio dos arquivos: ", time.time() - tempo_inicial)
 
 
-
         print("Razão entre os tamanhos dos arquivos: ", len(txBuffer1)/len(txBuffer2))  
         
         # Encerra comunicação
