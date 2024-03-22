@@ -15,14 +15,14 @@ import time
 import numpy as np
 import random
 import datetime
-
+from crc import Calculator, Crc8
 # voce deverá descomentar e configurar a porta com através da qual ira fazer comunicaçao
 #   para saber a sua porta, execute no terminal :
 #   python -m serial.tools.list_ports
 # se estiver usando windows, o gerenciador de dispositivos informa a porta
 
 
-serialName = "COM4"                  # Windows(variacao de)
+serialName = "COM9"                       # Windows(variacao de)
 
 def datagrama(tipo, num_ultimo_pacote):
     ceop = b'\xAA\xBB\xAA\xBB'
@@ -36,7 +36,7 @@ def datagrama(tipo, num_ultimo_pacote):
         head = b'\x05\x00'+ b'\x00\x00\x00\x00\x00\x00\x00\x00'
         dtg = head+ceop
     elif tipo == 6: # numero do pacote esperado incorreto
-        head = b'\x06' + (num_ultimo_pacote+1).to_bytes(1, 'big')+b'\x00\x00\x00\x00\x00\x00\x00\x00'
+        head = b'\x06' + (num_ultimo_pacote).to_bytes(1, 'big')+b'\x00\x00\x00\x00\x00\x00\x00\x00'
         dtg = head+ceop
     elif tipo == 7:  # ceop esta com problema ou pacote fora de ordem
         head = b'\x07' + (num_ultimo_pacote).to_bytes(1, 'big') + b'\x00\x00\x00\x00\x00\x00\x00\x00'
@@ -75,6 +75,7 @@ def crc16(data):
         
 def main():
     try:
+        calculator = Calculator(Crc8.CCITT)
         print("Iniciou o main")
         #declaramos um objeto do tipo enlace com o nome "com". Essa é a camada inferior à aplicação. Observe que um parametro
         #para declarar esse objeto é o nome da porta.
@@ -113,72 +114,93 @@ def main():
             tempo_duracao=0
             timeout=10
             tempo_inicial = time.time()
+            tempo_inicial2 = time.time()
             while cont <= total_pacotes:# and tempo_duracao< timeout:
-                print(cont,total_pacotes)
-                print("entrou no while")
-                print("head",head[0],head[1])
-                while com1.rx.getBufferLen() == 0:
+                print("entrou no while",cont,'de',total_pacotes)
+                print("head anterior",head[0],head[1])
+                while com1.rx.getBufferLen() < 14:
                     time.sleep(0.02)
                     tempo_duracao = time.time() - tempo_inicial
+                    tempo_duracao2 = time.time() - tempo_inicial2
                     if tempo_duracao >= 10:
                         print(tempo_duracao)
-                        escrever_log(f"Time out.", "log_server.txt")
-                        print("Time out!")   #
+                        escrever_log(f"Time out. Não recebi o pacote", "log_server.txt")
+                        print("Time out!")  
                         com1.sendData(datagrama(5,0))
                         com1.disable()
                         break
+                    if tempo_duracao2 > 2:
+                        print("reenviando confirmacao!")   
+                        com1.sendData(datagrama(4,cont))
+                        tempo_inicial2 = time.time() 
 
                 head, _ = com1.getData(10)    
-                print(head,'1')
+                crc_recebido = head[8]+head[9]
+                print('novo head',head)
                 payload,_ = com1.getData(head[3])
-                print(payload,'2')
+                #print('novo payload',payload)
                 ceop,_ = com1.getData(4)
-                print('3')
+                print("novo ceop",ceop)
                 #print("head2",head[0],head[1])
                 #print(conteudo_img)
                 if head[0] == 5:
                     escrever_log(f"Time out.", "log_server.txt")
                     com1.disable()
                 elif head[0] == 3:
-                    tempo_fim = time.time()
-                    tempo_duracao = tempo_fim - tempo_inicial
+                    print("mensagem tipo 3")
+                    CRC_ = calculator.checksum(payload)
+                    escrever_log(f"Recebi uma mensagem tipo 3 (pacote)", "log_server.txt")
+                    #tempo_fim = time.time()
+                    #tempo_duracao = tempo_fim - tempo_inicial
                     if ceop != b'\xAA\xBB\xAA\xBB':
+                        print("tipo 7 - erro de ceop")
                         com1.sendData(datagrama(7,head[1]))
                         com1.rx.clearBuffer()
-                    elif head[1] != cont:
+                        escrever_log(f"7 - Pacote fora de ordem", "log_server.txt")
+                    elif head[1] != cont or CRC_ != head[9]:
+                        print("valor checksum")
+                        print(CRC_)
+                        print(head[9])
+                        print(head[8])
+                        print("tipo 6 - pacote errado",head[1],cont)
                         com1.sendData(datagrama(6,cont))
-                        print("tipo 6")
-                    elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB':
+                        print(datagrama(6,cont),"k"*100)
+                        escrever_log(f"6 - Pacote esperado era {cont} mas recebi {head[1]}", "log_server.txt")
+                        #com1.rx.clearBuffer()
+                    elif head[1] == cont and ceop == b'\xAA\xBB\xAA\xBB' and CRC_ == head[9]:#check_crc16(payload,crc_recebido):
+                        print('tipo 4 - tudo certo')
+                        escrever_log(f"Pacote veio correto!", "log_server.txt")
                         tempo_inicial = 0
                         tempo_inicial = time.time()
                         print('tipo 4')
-                        cont+=1
+                        #cont+=1
                         conteudo_img += payload
-                        if head[1] == total_pacotes:
-                            print(head)
-                            com1.sendData(datagrama(4,cont-1))
+                        print(head[1])
+                        if cont+1 == total_pacotes+1:
+                            print("ultimo head",head)
+                            if imagem == 1:
+                                com1.sendData(datagrama(4,1)) # quero o primeiro pacote da segunda imagem
+                            elif imagem ==2:
+                                com1.sendData(datagrama(4,255))
                             salva_img(imagem,conteudo_img)
-                            escrever_log(f"Recebeu o arquivo de extensâo {imagem}", "log_server.txt")
-                            conteudo_img = bytearray()
-                            imagem +=1
+                            escrever_log(f"Recebeu o arquivo {imagem}.png", "log_server.txt")
+                            conteudo_img = bytearray() # esvaziando a imagem
+                            imagem +=1 # próxima imagem
                             if imagem == 3:
+                                time.sleep(2)
+                                com1.disable()
                                 break
                             else:
-                                cont = total_pacotes +1
-                                print("bla")
-                                head, _ = com1.getData(10)
-                                print("bla1",head)
-                                ceop, _ = com1.getData(4)
-                                print("bla2",ceop) 
+                                cont = total_pacotes +1 # forçando o while a acabar
+                                escrever_log(f"Iniciando envio do arquivo {imagem}.png", "log_server.txt")
                              
                             
                         else:
+                            cont+=1
                             com1.sendData(datagrama(4,cont))
-                '''if tempo_fim - tempo_inicial > timeout:
-                    escrever_log(f"Time out.", "log_server.txt")
-                    com1.sendData(datagrama(5, 0))
-                    com1.disable()
-                    print("Tempo de envio: ", tempo_duracao)'''
+                            print("eu to pedindo",datagrama(4,cont))
+                            escrever_log(f"Pedindo o próximo pacote {cont}", "log_server.txt")
+
 
  
 
